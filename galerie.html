@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie – Baba Döner</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .gallery-full {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-full .gallery-item { height: 250px; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.92);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: var(--radius-md);
+      object-fit: contain;
+    }
+    .lightbox__close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox__caption {
+      color: var(--zand);
+      margin-top: 1rem;
+      font-size: .95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">Baba<span>Döner</span></a>
+    <ul class="navbar__links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="galerie.html" class="active">Galerie</a></li>
+      <li><a href="reservering.html">Reserveren</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html" class="navbar__cta">Beheer</a></li>
+    </ul>
+    <div class="navbar__toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="menu-hero">
+    <h1>Onze Galerie</h1>
+    <p>Sfeer, gerechten en momenten die u doet terugkomen</p>
+  </div>
+
+  <section class="section">
+    <div class="filter-tabs" style="margin-bottom:2rem;">
+      <button class="filter-tab active" data-cat="all">Alles</button>
+      <button class="filter-tab" data-cat="gerecht">Gerechten</button>
+      <button class="filter-tab" data-cat="sfeer">Sfeer</button>
+      <button class="filter-tab" data-cat="keuken">Keuken</button>
+    </div>
+
+    <div class="gallery-full">
+
+      <div class="gallery-item" data-cat="gerecht" data-caption="Grill Mix Specialiteit">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600" alt="Grill Mix">
+        <div class="gallery-overlay">Grill Mix</div>
+      </div>
+      <div class="gallery-item" data-cat="gerecht" data-caption="İskender Kebap">
+        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=600" alt="İskender">
+        <div class="gallery-overlay">İskender Kebap</div>
+      </div>
+      <div class="gallery-item" data-cat="sfeer" data-caption="Restaurant Sfeer">
+        <img src="https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=600" alt="Sfeer">
+        <div class="gallery-overlay">Restaurant Sfeer</div>
+      </div>
+      <div class="gallery-item" data-cat="gerecht" data-caption="Linzensoep">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600" alt="Soep">
+        <div class="gallery-overlay">Mercimek Çorbası</div>
+      </div>
+      <div class="gallery-item" data-cat="gerecht" data-caption="Lahmacun">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600" alt="Lahmacun">
+        <div class="gallery-overlay">Verse Lahmacun</div>
+      </div>
+      <div class="gallery-item" data-cat="keuken" data-caption="Onze Keuken">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600" alt="Keuken">
+        <div class="gallery-overlay">De Keuken</div>
+      </div>
+      <div class="gallery-item" data-cat="sfeer" data-caption="Tafelopstelling">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Sfeer">
+        <div class="gallery-overlay">Sfeervolle Tafels</div>
+      </div>
+      <div class="gallery-item" data-cat="gerecht" data-caption="Adana Kebap">
+        <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600" alt="Adana">
+        <div class="gallery-overlay">Adana Kebap</div>
+      </div>
+      <div class="gallery-item" data-cat="keuken" data-caption="Verse Ingrediënten">
+        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="Ingrediënten">
+        <div class="gallery-overlay">Verse Producten</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox__close" id="lightboxClose">&times;</div>
+    <img src="" alt="" id="lightboxImg">
+    <div class="lightbox__caption" id="lightboxCaption"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div><div class="footer__brand-name">Baba<span>Döner</span></div><p class="footer__about">Authentieke Turkse keuken.</p></div>
+      <div><h4>Navigatie</h4><ul><li><a href="../index.html">Home</a></li><li><a href="menu.html">Menu</a></li><li><a href="reservering.html">Reserveren</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a>📞 020 – 123 45 67</a></li><li><a>📍 Keizersstraat 42, Amsterdam</a></li></ul></div>
+      <div><h4>Openingstijden</h4><ul><li><a>Ma–Vr: 11:00–22:00</a></li><li><a>Za: 11:00–23:00</a></li><li><a>Zo: 12:00–21:00</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; 2024 Baba Döner</span></div>
+  </footer>
+
+  <script>
+    // Filter
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        const cat = this.dataset.cat;
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+        });
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        document.getElementById('lightboxImg').src = img.src;
+        document.getElementById('lightboxImg').alt = img.alt;
+        document.getElementById('lightboxCaption').textContent = item.dataset.caption || '';
+        lightbox.classList.add('open');
+      });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berichten – Baba Döner Beheer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .berichten-layout { display:grid; grid-template-columns:320px 1fr; gap:0; }
+    .berichten-list { border-right:1px solid var(--zand); height:calc(100vh - 200px); overflow-y:auto; }
+    .bericht-item {
+      padding:1.25rem 1.5rem;
+      border-bottom:1px solid var(--zand);
+      cursor:pointer;
+      transition:background var(--transition);
+    }
+    .bericht-item:hover { background:var(--licht-zand); }
+    .bericht-item.active { background:rgba(0,95,106,.08); border-left:3px solid var(--turkoois); }
+    .bericht-item.unread .bericht-naam::before {
+      content: '';
+      display:inline-block;
+      width:8px; height:8px;
+      background:var(--terracotta);
+      border-radius:50%;
+      margin-right:.5rem;
+      vertical-align:middle;
+    }
+    .bericht-naam { font-weight:600; color:var(--bruin); font-size:.95rem; margin-bottom:.25rem; }
+    .bericht-onderwerp { font-size:.85rem; color:var(--bruin); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:.25rem; }
+    .bericht-datum { font-size:.75rem; color:#9a8070; }
+
+    .bericht-detail { padding:2rem; height:calc(100vh - 200px); overflow-y:auto; }
+    .bericht-detail.empty {
+      display:flex; align-items:center; justify-content:center;
+      color:#9a8070; font-size:1rem;
+    }
+    .bericht-detail-header {
+      padding-bottom:1.25rem;
+      border-bottom:1px solid var(--zand);
+      margin-bottom:1.5rem;
+    }
+    .bericht-detail-header h3 { font-family:var(--font-display); font-size:1.6rem; color:var(--bruin); margin-bottom:.5rem; }
+    .bericht-meta { display:flex; gap:2rem; font-size:.85rem; color:#6b5449; }
+    .bericht-tekst { line-height:1.75; color:var(--bruin); white-space:pre-line; }
+    .bericht-acties { margin-top:2rem; display:flex; gap:.75rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">Baba<span>Döner</span></a>
+    <ul class="navbar__links">
+      <li><a href="admin-dashboard.html">Dashboard</a></li>
+      <li><a href="admin-menu.html">Menu Beheer</a></li>
+      <li><a href="admin-reserveringen.html">Reserveringen</a></li>
+      <li><a href="admin-berichten.html" class="active">Berichten</a></li>
+      <li><a href="../index.html" class="navbar__cta">← Website</a></li>
+    </ul>
+  </nav>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__logo">Baba<span>Döner</span></div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="admin-menu.html"><span class="nav-icon">🍽️</span> Menu Beheer</a>
+        <a href="admin-reserveringen.html"><span class="nav-icon">📅</span> Reserveringen</a>
+        <a href="admin-berichten.html" class="active"><span class="nav-icon">✉️</span> Berichten</a>
+        <a href="login.html"><span class="nav-icon">🚪</span> Uitloggen</a>
+      </nav>
+    </aside>
+
+    <main class="admin-content" style="padding:0;">
+      <div style="padding:2rem 2rem 1rem; border-bottom:1px solid var(--zand); display:flex; justify-content:space-between; align-items:center;">
+        <h1 style="font-family:var(--font-display); font-size:2rem; color:var(--bruin);">Berichten <span class="badge badge--danger" style="font-size:.8rem; vertical-align:middle; margin-left:.5rem;">2 Ongelezen</span></h1>
+      </div>
+
+      <div class="berichten-layout">
+        <!-- Berichtenlijst -->
+        <div class="berichten-list">
+          <div class="bericht-item unread active" data-id="1"
+               data-van="m.hassan@email.nl" data-naam="Mohammed Hassan"
+               data-onderwerp="Vraag over allergieën"
+               data-datum="24 feb 2024, 14:32"
+               data-tekst="Goedemiddag,
+
+Ik wil graag bij u een reservering maken, maar ik heb een ernstige notenallergie. Kunt u mij vertellen welke gerechten veilig zijn voor mij om te eten? Ik ben met name benieuwd naar de grill specialiteiten en de pide gerechten.
+
+Alvast bedankt voor uw reactie.
+
+Met vriendelijke groet,
+Mohammed Hassan">
+            <div class="bericht-naam">Mohammed Hassan</div>
+            <div class="bericht-onderwerp">Vraag over allergieën</div>
+            <div class="bericht-datum">24 feb 2024</div>
+          </div>
+
+          <div class="bericht-item unread" data-id="2"
+               data-van="sarah.k@gmail.com" data-naam="Sarah Kowalski"
+               data-onderwerp="Groepsevenement – 20 personen"
+               data-datum="23 feb 2024, 16:15"
+               data-tekst="Hallo,
+
+Ik wil graag een groepsevenement organiseren bij uw restaurant voor 20 personen. Het gaat om een bedrijfsfeest op vrijdag 15 maart aanstaande.
+
+Kunt u mij informeren over de mogelijkheden en eventuele groepskortingen? We zouden ook graag een speciaal menu laten samenstellen.
+
+Met vriendelijke groet,
+Sarah Kowalski
+HR Manager, TechNL B.V.">
+            <div class="bericht-naam">Sarah Kowalski</div>
+            <div class="bericht-onderwerp">Groepsevenement – 20 personen</div>
+            <div class="bericht-datum">23 feb 2024</div>
+          </div>
+
+          <div class="bericht-item" data-id="3"
+               data-van="piet.j@outlook.com" data-naam="Piet Jansen"
+               data-onderwerp="Feedback over eten"
+               data-datum="22 feb 2024, 20:45"
+               data-tekst="Beste Baba Döner team,
+
+Ik wilde u laten weten dat ik gisteren voor het eerst bij u gegeten heb en ik ben erg onder de indruk! De İskender Kebap was werkelijk heerlijk en het personeel was zeer vriendelijk en behulpzaam.
+
+Ik kom zeker terug!
+
+Groeten,
+Piet Jansen">
+            <div class="bericht-naam">Piet Jansen</div>
+            <div class="bericht-onderwerp">Feedback over eten</div>
+            <div class="bericht-datum">22 feb 2024</div>
+          </div>
+        </div>
+
+        <!-- Berichtdetail -->
+        <div class="bericht-detail" id="berichtDetail">
+          <div class="bericht-detail-header">
+            <h3 id="detailOnderwerp">Vraag over allergieën</h3>
+            <div class="bericht-meta">
+              <span>Van: <strong id="detailVan">m.hassan@email.nl</strong></span>
+              <span>Naam: <strong id="detailNaam">Mohammed Hassan</strong></span>
+              <span>📅 <span id="detailDatum">24 feb 2024, 14:32</span></span>
+            </div>
+          </div>
+          <div class="bericht-tekst" id="detailTekst">Goedemiddag,
+
+Ik wil graag bij u een reservering maken, maar ik heb een ernstige notenallergie. Kunt u mij vertellen welke gerechten veilig zijn voor mij om te eten? Ik ben met name benieuwd naar de grill specialiteiten en de pide gerechten.
+
+Alvast bedankt voor uw reactie.
+
+Met vriendelijke groet,
+Mohammed Hassan</div>
+          <div class="bericht-acties">
+            <a class="btn btn--primary" id="replyBtn" href="mailto:m.hassan@email.nl">✉️ Beantwoorden</a>
+            <button class="btn btn--outline" style="color:var(--bruin); border-color:var(--zand);" id="markReadBtn">✓ Markeer als gelezen</button>
+            <button class="btn btn--outline" style="color:var(--terracotta); border-color:var(--terracotta);">🗑️ Verwijderen</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.querySelectorAll('.bericht-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.bericht-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        this.classList.remove('unread');
+        document.getElementById('detailOnderwerp').textContent = this.dataset.onderwerp;
+        document.getElementById('detailVan').textContent = this.dataset.van;
+        document.getElementById('detailNaam').textContent = this.dataset.naam;
+        document.getElementById('detailDatum').textContent = this.dataset.datum;
+        document.getElementById('detailTekst').textContent = this.dataset.tekst;
+        document.getElementById('replyBtn').href = `mailto:${this.dataset.van}?subject=RE: ${this.dataset.onderwerp}`;
+      });
+    });
+  </script>
+</body>
+</html>

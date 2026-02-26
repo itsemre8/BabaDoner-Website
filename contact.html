@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – Baba Döner</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-page { padding-top: 70px; }
+    .contact-hero {
+      background: linear-gradient(135deg, var(--bruin), #5c3a2e);
+      padding: 4rem clamp(1.5rem,6vw,4rem);
+      text-align: center;
+      color: var(--zand);
+    }
+    .contact-hero h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,4rem); margin-bottom:.5rem; }
+    .contact-hero p { color: rgba(230,211,179,.75); }
+    .map-placeholder {
+      background: var(--zand);
+      height: 300px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bruin);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      border: 2px dashed rgba(62,39,35,.2);
+    }
+    .success-msg {
+      display:none;
+      background:#d4edda;
+      border:2px solid #b5d6be;
+      border-radius:var(--radius-md);
+      padding:1.25rem;
+      margin-bottom:1rem;
+      color:#1a6132;
+      font-weight:600;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">Baba<span>Döner</span></a>
+    <ul class="navbar__links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="galerie.html">Galerie</a></li>
+      <li><a href="reservering.html">Reserveren</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="login.html" class="navbar__cta">Beheer</a></li>
+    </ul>
+    <div class="navbar__toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="contact-page">
+    <div class="contact-hero">
+      <h1>Neem Contact Op</h1>
+      <p>Vragen, feedback of speciale verzoeken? Wij helpen u graag!</p>
+    </div>
+
+    <section class="section">
+      <div class="contact-grid">
+
+        <!-- Contactinfo -->
+        <div>
+          <h3 style="font-family:var(--font-display); font-size:2rem; color:var(--bruin); margin-bottom:1.5rem;">Onze gegevens</h3>
+
+          <div class="contact-item">
+            <div class="contact-item__icon">📍</div>
+            <div>
+              <div class="contact-item__label">Adres</div>
+              <div class="contact-item__val">Keizersstraat 42<br>1012 HN Amsterdam</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item__icon">📞</div>
+            <div>
+              <div class="contact-item__label">Telefoon</div>
+              <div class="contact-item__val"><a href="tel:+31201234567" style="color:var(--turkoois);">020 – 123 45 67</a></div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item__icon">✉️</div>
+            <div>
+              <div class="contact-item__label">E-mail</div>
+              <div class="contact-item__val"><a href="mailto:info@babadoner.nl" style="color:var(--turkoois);">info@babadoner.nl</a></div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item__icon">🕐</div>
+            <div>
+              <div class="contact-item__label">Openingstijden</div>
+              <div class="contact-item__val">
+                <table class="hours-table" style="margin-top:.5rem;">
+                  <tr><td>Maandag</td><td>11:00 – 22:00</td></tr>
+                  <tr><td>Dinsdag</td><td>11:00 – 22:00</td></tr>
+                  <tr><td>Woensdag</td><td>11:00 – 22:00</td></tr>
+                  <tr><td>Donderdag</td><td>11:00 – 22:00</td></tr>
+                  <tr><td>Vrijdag</td><td>11:00 – 22:00</td></tr>
+                  <tr><td>Zaterdag</td><td>11:00 – 23:00</td></tr>
+                  <tr><td>Zondag</td><td>12:00 – 21:00</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-placeholder">
+            🗺️ Kaart – Keizersstraat 42, Amsterdam
+          </div>
+        </div>
+
+        <!-- Contactformulier -->
+        <div class="reservation-form-wrap">
+          <h3 style="font-family:var(--font-display); font-size:1.8rem; color:var(--bruin); margin-bottom:.5rem;">Stuur ons een Bericht</h3>
+          <p style="color:#6b5449; font-size:.9rem; margin-bottom:1.5rem;">Wij reageren binnen 24 uur op uw bericht.</p>
+
+          <div class="success-msg" id="contactSuccess">
+            ✅ Uw bericht is verzonden! Wij nemen zo snel mogelijk contact op.
+          </div>
+
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-naam">Naam *</label>
+                <input type="text" id="c-naam" class="form-control" placeholder="Uw volledige naam" required>
+              </div>
+              <div class="form-group">
+                <label for="c-email">E-mail *</label>
+                <input type="email" id="c-email" class="form-control" placeholder="uw@email.nl" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="c-tel">Telefoonnummer</label>
+              <input type="tel" id="c-tel" class="form-control" placeholder="06 – 1234 5678">
+            </div>
+
+            <div class="form-group">
+              <label for="c-onderwerp">Onderwerp *</label>
+              <select id="c-onderwerp" class="form-control" required>
+                <option value="">Kies een onderwerp</option>
+                <option>Algemene vraag</option>
+                <option>Reservering</option>
+                <option>Allergieën / dieetwensen</option>
+                <option>Groepsevenement</option>
+                <option>Feedback</option>
+                <option>Klacht</option>
+                <option>Anders</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="c-bericht">Uw bericht *</label>
+              <textarea id="c-bericht" class="form-control" rows="5" placeholder="Schrijf hier uw bericht..." required></textarea>
+            </div>
+
+            <div class="form-group" style="display:flex; align-items:center; gap:.75rem;">
+              <input type="checkbox" id="c-privacycheck" required style="width:18px; height:18px; accent-color:var(--turkoois);">
+              <label for="c-privacycheck" style="font-size:.85rem; color:#6b5449;">Ik ga akkoord met de verwerking van mijn gegevens.</label>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center;">
+              Verstuur Bericht →
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div><div class="footer__brand-name">Baba<span>Döner</span></div><p class="footer__about">Authentieke Turkse keuken.</p></div>
+      <div><h4>Navigatie</h4><ul><li><a href="../index.html">Home</a></li><li><a href="menu.html">Menu</a></li><li><a href="galerie.html">Galerie</a></li><li><a href="reservering.html">Reserveren</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a>📞 020 – 123 45 67</a></li><li><a>✉️ info@babadoner.nl</a></li><li><a>📍 Keizersstraat 42, Amsterdam</a></li></ul></div>
+      <div><h4>Openingstijden</h4><ul><li><a>Ma–Vr: 11:00–22:00</a></li><li><a>Za: 11:00–23:00</a></li><li><a>Zo: 12:00–21:00</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; 2024 Baba Döner</span></div>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('contactSuccess').style.display = 'block';
+      this.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

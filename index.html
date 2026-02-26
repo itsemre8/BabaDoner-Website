@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baba Döner– Authentiek Turks Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">Baba<span>Döner</span></a>
+        <ul class="navbar__links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="galerie.html">Galerie</a></li>
+            <li><a href="reservering.html">Reserveren</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="navbar__cta">Beheer</a></li>
+        </ul>
+        <div class="navbar__toggle" id="mobileToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <div class="hero__content">
+            <span class="hero__badge fade-up">🔥 Authentiek Turks – Vers Bereid</span>
+            <h1 class="hero__title fade-up fade-up-d1">Baba<span>Döner</span></h1>
+            <p class="hero__text fade-up fade-up-d2">
+                Proef het hart van Turkije. Van geurige döner en sappige kebab tot rijke iskender en huisgemaakte soepen
+                – elke hap is een reis.
+            </p>
+            <div class="hero__btns fade-up fade-up-d3">
+                <a href="pages/menu.html" class="btn btn--primary">Bekijk het Menu &rarr;</a>
+                <a href="pages/reservering.html" class="btn btn--outline">Reserveer een Tafel</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section__header">
+            <span class="section__subtitle">Onze Specialiteiten</span>
+            <h2 class="section__title">Populairste Gerechten</h2>
+            <div class="divider"><span class="divider__icon">✦</span></div>
+        </div>
+
+ 
+        <form class="search-bar" id="searchForm">
+            <input type="text" id="searchInput" placeholder="Zoek een gerecht... bijv. kebab, soep, lahmacun"
+                autocomplete="off">
+            <button type="submit">🔍 Zoeken</button>
+        </form>
+
+
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" data-cat="all">Alles</button>
+            <button class="filter-tab" data-cat="grill">Grill</button>
+            <button class="filter-tab" data-cat="doner">Döner</button>
+            <button class="filter-tab" data-cat="soep">Soepen</button>
+            <button class="filter-tab" data-cat="pide">Pide &amp; Lahmacun</button>
+        </div>
+
+
+        <div class="dishes-grid" id="dishesGrid">
+
+            <div class="dish-card" data-cat="grill">
+                <div class="dish-card__img">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500" alt="Grill Mix">
+                    <span class="dish-card__badge">Bestseller</span>
+                </div>
+                <div class="dish-card__body">
+                    <div class="dish-card__cat">Grill</div>
+                    <div class="dish-card__name">Grill Mix Bord</div>
+                    <p class="dish-card__desc">Gemengd grilbord met köfte, adana, tavuk şiş en verse groenten.</p>
+                    <div class="dish-card__footer">
+                        <span class="dish-card__price">€18,95</span>
+                        <button class="dish-card__add" title="Voeg toe aan winkelwagen">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card" data-cat="doner">
+                <div class="dish-card__img">
+                    <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500" alt="İskender Kebap">
+                </div>
+                <div class="dish-card__body">
+                    <div class="dish-card__cat">Döner</div>
+                    <div class="dish-card__name">İskender Kebap</div>
+                    <p class="dish-card__desc">Dunne plakken döner op pide, overgoten met tomatensaus en bruine boter.
+                    </p>
+                    <div class="dish-card__footer">
+                        <span class="dish-card__price">€16,50</span>
+                        <button class="dish-card__add" title="Voeg toe aan winkelwagen">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card" data-cat="soep">
+                <div class="dish-card__img">
+                    <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500" alt="Mercimek Çorbası">
+                </div>
+                <div class="dish-card__body">
+                    <div class="dish-card__cat">Soep</div>
+                    <div class="dish-card__name">Mercimek Çorbası</div>
+                    <p class="dish-card__desc">Fluweelzachte rode linzensoep met citroen en munt. Huisgemaakt recept.
+                    </p>
+                    <div class="dish-card__footer">
+                        <span class="dish-card__price">€5,50</span>
+                        <button class="dish-card__add" title="Voeg toe aan winkelwagen">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card" data-cat="doner">
+                <div class="dish-card__img">
+                    <img src="https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=500" alt="Dürüm Döner">
+                    <span class="dish-card__badge">Nieuw</span>
+                </div>
+                <div class="dish-card__body">
+                    <div class="dish-card__cat">Döner</div>
+                    <div class="dish-card__name">Dürüm Döner</div>
+                    <p class="dish-card__desc">Döner in dunne lavaş gedraaid met kaas, sla, tomaat en huissaus.</p>
+                    <div class="dish-card__footer">
+                        <span class="dish-card__price">€9,50</span>
+                        <button class="dish-card__add" title="Voeg toe aan winkelwagen">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card" data-cat="pide">
+                <div class="dish-card__img">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500" alt="Lahmacun">
+                </div>
+                <div class="dish-card__body">
+                    <div class="dish-card__cat">Pide &amp; Lahmacun</div>
+                    <div class="dish-card__name">Lahmacun</div>
+                    <p class="dish-card__desc">Knapperig Turks flatbread belegd met gekruid gehakt, peterselie en
+                        citroen.</p>
+                    <div class="dish-card__footer">
+                        <span class="dish-card__price">€4,95</span>
+                        <button class="dish-card__add" title="Voeg toe aan winkelwagen">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dish-card" data-cat="grill">
+                <div class="dish-card__img">
+                    <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500" alt="Adana Kebap">
+                </div>
+                <div class="dish-card__body">
+                    <div class="dish-card__cat">Grill</div>
+                    <div class="dish-card__name">Adana Kebap</div>
+                    <p class="dish-card__desc">Gekruide lamsgehaktspies van de houtskooloven, met bulgur en salade.</p>
+                    <div class="dish-card__footer">
+                        <span class="dish-card__price">€14,95</span>
+                        <button class="dish-card__add" title="Voeg toe aan winkelwagen">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /dishes-grid -->
+
+        <div style="text-align:center; margin-top:2.5rem;">
+            <a href="pages/menu.html" class="btn btn--dark">Volledig Menu Bekijken</a>
+        </div>
+    </section>
+
+    <!-- ═══════ OVER ONS ═══════ -->
+    <section class="section section--bg">
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800" alt="Ons Restaurant">
+            </div>
+            <div class="about-content">
+                <span class="section__subtitle">Ons Verhaal</span>
+                <h2 class="section__title">Turks hart, Hollandse thuis</h2>
+                <p class="about-text">
+                    Baba Döner opgericht door de familie Aktas, die hun Anatolische recepten meebrachten. Elk gerecht is
+                    een liefdesverklaring aan de Turkse keuken: traag bereide sauzen, vers gesneden döner en grill
+                    bereid boven echte houtskool.
+                </p>
+                <p class="about-text">
+                    Wij geloven dat goed eten mensen samenbrengt. Kom binnen, ga zitten en laat u verwennen.
+                </p>
+                <div class="facts-row">
+                    <div class="fact"><span class="fact__num">12+</span><span class="fact__label">Jaar Ervaring</span>
+                    </div>
+                    <div class="fact"><span class="fact__num">60+</span><span class="fact__label">Gerechten</span></div>
+                    <div class="fact"><span class="fact__num">★ 4.9</span><span class="fact__label">Beoordeling</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ GALERIE PREVIEW ═══════ -->
+    <section class="section">
+        <div class="section__header">
+            <span class="section__subtitle">Sfeer &amp; Gerechten</span>
+            <h2 class="section__title">Een kijkje in de keuken</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800" alt="Grill">
+                <div class="gallery-overlay">Grill Specialiteiten</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=500" alt="İskender">
+                <div class="gallery-overlay">İskender Kebap</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=500" alt="Sfeer">
+                <div class="gallery-overlay">Restaurant Sfeer</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500" alt="Soep">
+                <div class="gallery-overlay">Huisgemaakte Soepen</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=700" alt="Lahmacun">
+                <div class="gallery-overlay">Verse Lahmacun</div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:2rem;">
+            <a href="pages/galerie.html" class="btn btn--outline"
+                style="color:var(--bruin); border-color:var(--bruin);">Meer Foto's</a>
+        </div>
+    </section>
+
+
+    <section class="section section--dark" style="text-align:center;">
+        <span class="section__subtitle">Wacht niet</span>
+        <h2 class="section__title">Reserveer uw Tafel</h2>
+        <p class="section__desc" style="margin-bottom:2rem;">
+            Voor een onvergetelijke avond met familie of vrienden. Reserveer eenvoudig online.
+        </p>
+        <a href="pages/reservering.html" class="btn btn--primary">Reserveer Nu</a>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer__grid">
+            <div>
+                <div class="footer__brand-name">Baba<span>Döner</span></div>
+                <p class="footer__about">Authentieke Turkse keuken bereid met verse ingrediënten en eeuwenoude recepten.
+                    Al meer dan 12 jaar uw thuis voor döner, kebab en grill gerechten.</p>
+            </div>
+            <div>
+                <h4>Navigatie</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/menu.html">Menu</a></li>
+                    <li><a href="pages/galerie.html">Galerie</a></li>
+                    <li><a href="pages/reservering.html">Reserveren</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Openingstijden</h4>
+                <ul>
+                    <li><a>Ma–Vr: 11:00 – 22:00</a></li>
+                    <li><a>Zaterdag: 11:00 – 23:00</a></li>
+                    <li><a>Zondag: 12:00 – 21:00</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+31201234567">📞 020 – 123 45 67</a></li>
+                    <li><a href="mailto:info@donerkoning.nl">✉️ info@donerkoning.nl</a></li>
+                    <li><a>📍 Keizersstraat 42, Amsterdam</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>&copy; 2024 Baba Döner. Alle rechten voorbehouden.</span>
+            <div class="footer__socials">
+                <a href="#" class="footer__social-link" title="Facebook">f</a>
+                <a href="#" class="footer__social-link" title="Instagram">ig</a>
+                <a href="#" class="footer__social-link" title="WhatsApp">wa</a>
+            </div>
+        </div>
+    </footer>
+
+    
+    <a href="#" class="cart-icon" id="cartIcon" title="Winkelwagen">
+        🛒
+        <span class="cart-icon__count" id="cartCount">0</span>
+    </a>
+
+    
+    <script>
+        // Mobiel menu
+        document.getElementById('mobileToggle').addEventListener('click', function () {
+            const links = document.querySelector('.navbar__links');
+            links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Winkelwagen teller
+        let cartCount = 0;
+        document.querySelectorAll('.dish-card__add').forEach(btn => {
+            btn.addEventListener('click', () => {
+                cartCount++;
+                document.getElementById('cartCount').textContent = cartCount;
+                btn.textContent = '✓';
+                btn.style.background = 'var(--terracotta)';
+                setTimeout(() => { btn.textContent = '+'; btn.style.background = ''; }, 1200);
+            });
+        });
+
+        // Categorie filter
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const cat = this.dataset.cat;
+                document.querySelectorAll('.dish-card').forEach(card => {
+                    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+                });
+            });
+        });
+
+        // Zoek functie
+        document.getElementById('searchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.dish-card').forEach(card => {
+                const name = card.querySelector('.dish-card__name').textContent.toLowerCase();
+                const desc = card.querySelector('.dish-card__desc').textContent.toLowerCase();
+                card.style.display = (name.includes(q) || desc.includes(q)) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

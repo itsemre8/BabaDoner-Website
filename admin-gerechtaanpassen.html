@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerecht Aanpassen – Baba Döner Beheer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .edit-page-card {
+      background: var(--wit);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem;
+      max-width: 700px;
+    }
+
+    .success-banner {
+      display: none;
+      background: #d4edda;
+      border: 2px solid #b5d6be;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: #1a6132;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .img-preview {
+      width: 100%;
+      height: 200px;
+      background: var(--zand);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9a8070;
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .img-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">Baba<span>Döner</span></a>
+    <ul class="navbar__links">
+      <li><a href="admin-dashboard.html">Dashboard</a></li>
+      <li><a href="admin-menu.html" class="active">Menu Beheer</a></li>
+      <li><a href="admin-reserveringen.html">Reserveringen</a></li>
+      <li><a href="admin-berichten.html">Berichten</a></li>
+      <li><a href="../index.html" class="navbar__cta">← Website</a></li>
+    </ul>
+  </nav>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__logo">Baba<span>Döner</span></div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="admin-menu.html" class="active"><span class="nav-icon">🍽️</span> Menu Beheer</a>
+        <a href="admin-reserveringen.html"><span class="nav-icon">📅</span> Reserveringen</a>
+        <a href="admin-berichten.html"><span class="nav-icon">✉️</span> Berichten</a>
+        <a href="login.html"><span class="nav-icon">🚪</span> Uitloggen</a>
+      </nav>
+    </aside>
+
+    <main class="admin-content">
+      <div class="admin-header">
+        <div>
+          <a href="admin-menu.html"
+            style="font-size:.85rem; color:var(--turkoois); display:inline-flex; align-items:center; gap:.4rem; margin-bottom:.5rem;">←
+            Terug naar Menu Beheer</a>
+          <h1>Gerecht Aanpassen</h1>
+        </div>
+        <div style="display:flex; gap:.75rem;">
+          <button class="btn btn--outline" style="color:var(--terracotta); border-color:var(--terracotta);"
+            id="deleteBtn">🗑️ Verwijderen</button>
+          <button class="btn btn--primary" form="editForm">Wijzigingen Opslaan</button>
+        </div>
+      </div>
+
+      <div class="success-banner" id="successBanner">
+        ✅ Wijzigingen zijn succesvol opgeslagen!
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:2rem; align-items:start;">
+
+        <!-- Afbeelding preview -->
+        <div class="edit-page-card">
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; color:var(--bruin); margin-bottom:1rem;">
+            Afbeelding</h3>
+          <div class="img-preview" id="imgPreview">
+            <span>📷 Geen afbeelding</span>
+          </div>
+          <div class="form-group">
+            <label>Afbeelding URL</label>
+            <input type="url" class="form-control" id="img-url" placeholder="https://..."
+              oninput="previewImg(this.value)">
+          </div>
+          <div class="form-group">
+            <label>Alternatieve tekst</label>
+            <input type="text" class="form-control" placeholder="bijv. Foto van İskender Kebap">
+          </div>
+
+          <hr style="border:none; border-top:1px solid var(--zand); margin:1.5rem 0;">
+
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; color:var(--bruin); margin-bottom:1rem;">
+            Beschikbaarheid</h3>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control">
+              <option value="actief">✅ Actief – Zichtbaar op menu</option>
+              <option value="inactief">⛔ Inactief – Verborgen</option>
+              <option value="uitverkocht">🔴 Tijdelijk uitverkocht</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Aanbevolen gerecht</label>
+            <select class="form-control">
+              <option>Nee</option>
+              <option>Ja – Toon als Bestseller</option>
+              <option>Ja – Toon als Chef's Keuze</option>
+              <option>Ja – Toon als Nieuw</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hoofdformulier -->
+        <div class="edit-page-card">
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; color:var(--bruin); margin-bottom:1.5rem;">
+            Gerecht Details</h3>
+          <form id="editForm">
+            <div class="form-group">
+              <label>Naam gerecht *</label>
+              <input type="text" class="form-control" value="İskender Kebap" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Categorie *</label>
+                <select class="form-control" required>
+                  <option>Voorgerechten</option>
+                  <option>Soepen</option>
+                  <option selected>Döner & Wrap</option>
+                  <option>Grill Specialiteiten</option>
+                  <option>Pide & Lahmacun</option>
+                  <option>Salades</option>
+                  <option>Desserts</option>
+                  <option>Dranken</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Prijs (€) *</label>
+                <input type="number" step="0.05" class="form-control" value="16.50" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Korte beschrijving</label>
+              <textarea class="form-control"
+                rows="3">Dunne plakken döner op pide, overgoten met tomatensaus en bruine boter.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Uitgebreide beschrijving</label>
+              <textarea class="form-control" rows="4"
+                placeholder="Uitgebreide beschrijving voor de menukaart...">De İskender Kebap is een iconisch Turks gerecht afkomstig uit Bursa. Bij ons wordt het gemaakt met vers gesneden döner van het spit, geserveerd op stukken zacht pidebröd, royaal overgoten met een rijke tomatensaus en afgemaakt met geklaard bruine boter. Geserveerd met verse cacık aan de zijkant.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Allergenen</label>
+              <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem;">
+                <label
+                  style="display:flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:400; cursor:pointer;"><input
+                    type="checkbox" checked style="accent-color:var(--turkoois);"> Gluten</label>
+                <label
+                  style="display:flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:400; cursor:pointer;"><input
+                    type="checkbox" checked style="accent-color:var(--turkoois);"> Lactose</label>
+                <label
+                  style="display:flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:400; cursor:pointer;"><input
+                    type="checkbox" style="accent-color:var(--turkoois);"> Noten</label>
+                <label
+                  style="display:flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:400; cursor:pointer;"><input
+                    type="checkbox" style="accent-color:var(--turkoois);"> Ei</label>
+                <label
+                  style="display:flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:400; cursor:pointer;"><input
+                    type="checkbox" style="accent-color:var(--turkoois);"> Sesam</label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Calorieën (kcal)</label>
+                <input type="number" class="form-control" placeholder="bijv. 650">
+              </div>
+              <div class="form-group">
+                <label>Bereidingstijd (min)</label>
+                <input type="number" class="form-control" placeholder="bijv. 15">
+              </div>
+            </div>
+
+            <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;">
+              <a href="admin-menu.html" class="btn btn--outline"
+                style="color:var(--bruin); border-color:var(--zand);">Annuleren</a>
+              <button type="submit" class="btn btn--teal">Opslaan ✓</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function previewImg(url) {
+      const preview = document.getElementById('imgPreview');
+      if (url) {
+        preview.innerHTML = `<img src="${url}" alt="Preview">`;
+      } else {
+        preview.innerHTML = '<span>📷 Geen afbeelding</span>';
+      }
+    }
+
+    document.getElementById('editForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const banner = document.getElementById('successBanner');
+      banner.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => banner.style.display = 'none', 4000);
+    });
+
+    document.getElementById('deleteBtn').addEventListener('click', function () {
+      if (confirm('Weet u zeker dat u dit gerecht wilt verwijderen?')) {
+        window.location.href = 'admin-menu.html';
+      }
+    });
+  </script>
+</body>
+
+</html>

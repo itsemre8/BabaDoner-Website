@@ -1,0 +1,33 @@
+ <script>
+    let count = 0;
+    document.querySelectorAll('.dish-card__add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        count++;
+        document.getElementById('cartCount').textContent = count;
+        btn.textContent = '✓';
+        setTimeout(() => btn.textContent = '+', 1200);
+      });
+    });
+
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        const cat = this.dataset.cat;
+        document.querySelectorAll('.dish-card').forEach(card => {
+          card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+        });
+      });
+    });
+
+    document.getElementById('menuSearch').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const q = document.getElementById('menuSearchInput').value.toLowerCase();
+      document.querySelectorAll('.dish-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Beheer – Baba Döner Beheer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .modal-overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.55); z-index:5000;
+      align-items:center; justify-content:center;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal {
+      background:var(--wit); border-radius:var(--radius-lg);
+      padding:2.5rem; width:100%; max-width:520px;
+      box-shadow:var(--shadow-lg); max-height:90vh; overflow-y:auto;
+    }
+    .modal h3 { font-family:var(--font-display); font-size:1.8rem; color:var(--bruin); margin-bottom:1.5rem; }
+    .modal-close { float:right; font-size:1.5rem; cursor:pointer; color:#6b5449; }
+
+    .confirm-modal {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.6); z-index:6000;
+      align-items:center; justify-content:center;
+    }
+    .confirm-modal.open { display:flex; }
+    .confirm-box {
+      background:var(--wit); border-radius:var(--radius-md);
+      padding:2rem; max-width:400px; text-align:center;
+      box-shadow:var(--shadow-lg);
+    }
+    .confirm-box h4 { font-family:var(--font-display); font-size:1.5rem; color:var(--bruin); margin-bottom:.75rem; }
+    .confirm-box p { color:#6b5449; margin-bottom:1.5rem; }
+    .confirm-btns { display:flex; gap:1rem; justify-content:center; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">Baba<span>Döner</span></a>
+    <ul class="navbar__links">
+      <li><a href="admin-dashboard.html">Dashboard</a></li>
+      <li><a href="admin-menu.html" class="active">Menu Beheer</a></li>
+      <li><a href="admin-reserveringen.html">Reserveringen</a></li>
+      <li><a href="admin-berichten.html">Berichten</a></li>
+      <li><a href="../index.html" class="navbar__cta">← Website</a></li>
+    </ul>
+  </nav>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__logo">Baba<span>Döner</span></div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="admin-menu.html" class="active"><span class="nav-icon">🍽️</span> Menu Beheer</a>
+        <a href="admin-reserveringen.html"><span class="nav-icon">📅</span> Reserveringen</a>
+        <a href="admin-berichten.html"><span class="nav-icon">✉️</span> Berichten</a>
+        <a href="login.html"><span class="nav-icon">🚪</span> Uitloggen</a>
+      </nav>
+    </aside>
+
+    <main class="admin-content">
+      <div class="admin-header">
+        <h1>Menu Beheer</h1>
+        <button class="btn btn--primary" id="openAddModal">+ Gerecht Toevoegen</button>
+      </div>
+
+      <!-- Filter & zoek -->
+      <div style="display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; align-items:center;">
+        <input type="text" id="adminSearch" class="form-control" placeholder="Zoek gerecht..." style="max-width:280px;">
+        <select id="adminCatFilter" class="form-control" style="max-width:200px;">
+          <option value="all">Alle categorieën</option>
+          <option>Voorgerechten</option>
+          <option>Soepen</option>
+          <option>Döner & Wrap</option>
+          <option>Grill Specialiteiten</option>
+          <option>Pide & Lahmacun</option>
+          <option>Salades</option>
+          <option>Desserts</option>
+          <option>Dranken</option>
+        </select>
+      </div>
+
+      <!-- Gerechten tabel -->
+      <div class="data-table-wrap">
+        <div class="data-table-header">
+          <h3>Alle Gerechten <span style="font-size:1rem; color:#6b5449;" id="dishCount">(14 gerechten)</span></h3>
+        </div>
+        <table class="data-table" id="menuTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Naam</th>
+              <th>Categorie</th>
+              <th>Prijs</th>
+              <th>Status</th>
+              <th>Acties</th>
+            </tr>
+          </thead>
+          <tbody id="menuTableBody">
+            <tr data-id="1" data-naam="Mezze Bordje" data-cat="Voorgerechten" data-prijs="8.50" data-desc="Hummus, babaganoush, cacık en verse pita." data-status="actief">
+              <td>1</td><td><strong>Mezze Bordje</strong></td><td>Voorgerechten</td><td>€ 8,50</td>
+              <td><span class="badge badge--success">Actief</span></td>
+              <td><div class="action-btns">
+                <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+                <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+              </div></td>
+            </tr>
+            <tr data-id="2" data-naam="Sigara Böreği" data-cat="Voorgerechten" data-prijs="6.50" data-desc="Knapperige filodeeg met feta en peterselie." data-status="actief">
+              <td>2</td><td><strong>Sigara Böreği</strong></td><td>Voorgerechten</td><td>€ 6,50</td>
+              <td><span class="badge badge--success">Actief</span></td>
+              <td><div class="action-btns">
+                <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+                <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+              </div></td>
+            </tr>
+            <tr data-id="3" data-naam="Mercimek Çorbası" data-cat="Soepen" data-prijs="5.50" data-desc="Rode linzensoep met citroen en munt." data-status="actief">
+              <td>3</td><td><strong>Mercimek Çorbası</strong></td><td>Soepen</td><td>€ 5,50</td>
+              <td><span class="badge badge--success">Actief</span></td>
+              <td><div class="action-btns">
+                <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+                <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+              </div></td>
+            </tr>
+            <tr data-id="4" data-naam="İskender Kebap" data-cat="Döner & Wrap" data-prijs="16.50" data-desc="Döner op pide met tomatensaus en bruine boter." data-status="actief">
+              <td>4</td><td><strong>İskender Kebap</strong></td><td>Döner & Wrap</td><td>€ 16,50</td>
+              <td><span class="badge badge--success">Actief</span></td>
+              <td><div class="action-btns">
+                <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+                <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+              </div></td>
+            </tr>
+            <tr data-id="5" data-naam="Grill Mix Bord" data-cat="Grill Specialiteiten" data-prijs="22.95" data-desc="Köfte, adana, tavuk şiş en kuzu şiş met garnituren." data-status="actief">
+              <td>5</td><td><strong>Grill Mix Bord</strong></td><td>Grill Specialiteiten</td><td>€ 22,95</td>
+              <td><span class="badge badge--success">Actief</span></td>
+              <td><div class="action-btns">
+                <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+                <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+              </div></td>
+            </tr>
+            <tr data-id="6" data-naam="Baklava" data-cat="Desserts" data-prijs="4.50" data-desc="Bladerdeeg met pistache en honingsiroop." data-status="inactief">
+              <td>6</td><td><strong>Baklava</strong></td><td>Desserts</td><td>€ 4,50</td>
+              <td><span class="badge badge--warning">Inactief</span></td>
+              <td><div class="action-btns">
+                <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+                <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL: Gerecht Toevoegen -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal">
+      <span class="modal-close" id="closeAddModal">&times;</span>
+      <h3>Gerecht Toevoegen</h3>
+      <form id="addDishForm">
+        <div class="form-group">
+          <label>Naam gerecht *</label>
+          <input type="text" class="form-control" id="add-naam" placeholder="bijv. Tavuk Şiş" required>
+        </div>
+        <div class="form-group">
+          <label>Categorie *</label>
+          <select class="form-control" id="add-cat" required>
+            <option value="">Kies categorie</option>
+            <option>Voorgerechten</option>
+            <option>Soepen</option>
+            <option>Döner & Wrap</option>
+            <option>Grill Specialiteiten</option>
+            <option>Pide & Lahmacun</option>
+            <option>Salades</option>
+            <option>Desserts</option>
+            <option>Dranken</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prijs (€) *</label>
+            <input type="number" step="0.05" min="0" class="form-control" id="add-prijs" placeholder="0.00" required>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" id="add-status">
+              <option value="actief">Actief</option>
+              <option value="inactief">Inactief</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Beschrijving</label>
+          <textarea class="form-control" id="add-desc" rows="3" placeholder="Korte beschrijving van het gerecht..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Afbeelding URL</label>
+          <input type="url" class="form-control" id="add-img" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>Allergenen</label>
+          <input type="text" class="form-control" placeholder="bijv. gluten, lactose, noten">
+        </div>
+        <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;">
+          <button type="button" class="btn btn--outline" style="color:var(--bruin); border-color:var(--zand);" id="cancelAdd">Annuleren</button>
+          <button type="submit" class="btn btn--primary">Toevoegen →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Gerecht Bewerken -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <span class="modal-close" id="closeEditModal">&times;</span>
+      <h3>Gerecht Aanpassen</h3>
+      <form id="editDishForm">
+        <input type="hidden" id="edit-id">
+        <div class="form-group">
+          <label>Naam gerecht *</label>
+          <input type="text" class="form-control" id="edit-naam" required>
+        </div>
+        <div class="form-group">
+          <label>Categorie *</label>
+          <select class="form-control" id="edit-cat" required>
+            <option>Voorgerechten</option>
+            <option>Soepen</option>
+            <option>Döner & Wrap</option>
+            <option>Grill Specialiteiten</option>
+            <option>Pide & Lahmacun</option>
+            <option>Salades</option>
+            <option>Desserts</option>
+            <option>Dranken</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prijs (€) *</label>
+            <input type="number" step="0.05" min="0" class="form-control" id="edit-prijs" required>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" id="edit-status">
+              <option value="actief">Actief</option>
+              <option value="inactief">Inactief</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Beschrijving</label>
+          <textarea class="form-control" id="edit-desc" rows="3"></textarea>
+        </div>
+        <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;">
+          <button type="button" class="btn btn--outline" style="color:var(--bruin); border-color:var(--zand);" id="cancelEdit">Annuleren</button>
+          <button type="submit" class="btn btn--teal">Opslaan ✓</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bevestig verwijderen -->
+  <div class="confirm-modal" id="confirmModal">
+    <div class="confirm-box">
+      <h4>Gerecht Verwijderen</h4>
+      <p>Weet u zeker dat u <strong id="confirmName"></strong> wilt verwijderen? Dit kan niet ongedaan worden gemaakt.</p>
+      <div class="confirm-btns">
+        <button class="btn btn--outline" style="color:var(--bruin); border-color:var(--zand);" id="cancelDel">Annuleren</button>
+        <button class="btn btn--primary" id="confirmDel">Ja, Verwijderen</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal helpers
+    const addModal = document.getElementById('addModal');
+    const editModal = document.getElementById('editModal');
+    const confirmModal = document.getElementById('confirmModal');
+
+    document.getElementById('openAddModal').addEventListener('click', () => addModal.classList.add('open'));
+    document.getElementById('closeAddModal').addEventListener('click', () => addModal.classList.remove('open'));
+    document.getElementById('cancelAdd').addEventListener('click', () => addModal.classList.remove('open'));
+    document.getElementById('closeEditModal').addEventListener('click', () => editModal.classList.remove('open'));
+    document.getElementById('cancelEdit').addEventListener('click', () => editModal.classList.remove('open'));
+    document.getElementById('cancelDel').addEventListener('click', () => confirmModal.classList.remove('open'));
+
+    // Toevoegen
+    document.getElementById('addDishForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const naam = document.getElementById('add-naam').value;
+      const cat  = document.getElementById('add-cat').value;
+      const prijs = parseFloat(document.getElementById('add-prijs').value).toFixed(2);
+      const status = document.getElementById('add-status').value;
+      const tbody = document.getElementById('menuTableBody');
+      const rows = tbody.querySelectorAll('tr');
+      const newId = rows.length + 1;
+      const tr = document.createElement('tr');
+      tr.dataset.id = newId;
+      tr.dataset.naam = naam;
+      tr.dataset.cat = cat;
+      tr.dataset.prijs = prijs;
+      tr.dataset.status = status;
+      tr.innerHTML = `
+        <td>${newId}</td>
+        <td><strong>${naam}</strong></td>
+        <td>${cat}</td>
+        <td>€ ${prijs.replace('.',',')}</td>
+        <td><span class="badge badge--${status === 'actief' ? 'success' : 'warning'}">${status === 'actief' ? 'Actief' : 'Inactief'}</span></td>
+        <td><div class="action-btns">
+          <button class="action-btn action-btn--edit edit-btn" title="Aanpassen">✏️</button>
+          <button class="action-btn action-btn--del del-btn" title="Verwijderen">🗑️</button>
+        </div></td>
+      `;
+      tbody.appendChild(tr);
+      attachRowListeners(tr);
+      addModal.classList.remove('open');
+      this.reset();
+    });
+
+    // Bewerken
+    document.getElementById('editDishForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-id').value;
+      const naam = document.getElementById('edit-naam').value;
+      const cat  = document.getElementById('edit-cat').value;
+      const prijs = parseFloat(document.getElementById('edit-prijs').value).toFixed(2);
+      const status = document.getElementById('edit-status').value;
+      const row = document.querySelector(`tr[data-id="${id}"]`);
+      if (row) {
+        row.cells[1].innerHTML = `<strong>${naam}</strong>`;
+        row.cells[2].textContent = cat;
+        row.cells[3].textContent = `€ ${prijs.replace('.',',')}`;
+        row.cells[4].innerHTML = `<span class="badge badge--${status === 'actief' ? 'success' : 'warning'}">${status === 'actief' ? 'Actief' : 'Inactief'}</span>`;
+        row.dataset.naam = naam; row.dataset.cat = cat; row.dataset.prijs = prijs; row.dataset.status = status;
+      }
+      editModal.classList.remove('open');
+    });
+
+    // Verwijderen bevestigen
+    let delTarget = null;
+    document.getElementById('confirmDel').addEventListener('click', function() {
+      if (delTarget) { delTarget.remove(); delTarget = null; }
+      confirmModal.classList.remove('open');
+    });
+
+    function attachRowListeners(row) {
+      row.querySelector('.edit-btn').addEventListener('click', function() {
+        document.getElementById('edit-id').value   = row.dataset.id;
+        document.getElementById('edit-naam').value = row.dataset.naam;
+        document.getElementById('edit-cat').value  = row.dataset.cat;
+        document.getElementById('edit-prijs').value = row.dataset.prijs;
+        document.getElementById('edit-status').value = row.dataset.status || 'actief';
+        document.getElementById('edit-desc').value = row.dataset.desc || '';
+        editModal.classList.add('open');
+      });
+      row.querySelector('.del-btn').addEventListener('click', function() {
+        delTarget = row;
+        document.getElementById('confirmName').textContent = row.dataset.naam;
+        confirmModal.classList.add('open');
+      });
+    }
+
+    document.querySelectorAll('#menuTableBody tr').forEach(attachRowListeners);
+
+    // Zoeken in admin tabel
+    document.getElementById('adminSearch').addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      document.querySelectorAll('#menuTableBody tr').forEach(row => {
+        row.style.display = row.dataset.naam.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

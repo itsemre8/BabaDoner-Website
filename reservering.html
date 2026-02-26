@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserveren – Baba Döner</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .res-page { padding-top: 70px; }
+    .res-hero {
+      background: linear-gradient(135deg, var(--turkoois) 0%, var(--bruin) 100%);
+      padding: 4rem clamp(1.5rem,6vw,4rem);
+      text-align: center;
+      color: var(--zand);
+    }
+    .res-hero h1 { font-family: var(--font-display); font-size: clamp(2rem,5vw,4rem); margin-bottom: .5rem; }
+    .res-hero p { color: rgba(230,211,179,.75); }
+
+    .success-msg {
+      display: none;
+      background: #d4edda;
+      border: 2px solid #b5d6be;
+      border-radius: var(--radius-md);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #1a6132;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__logo">Baba<span>Döner</span></a>
+    <ul class="navbar__links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="galerie.html">Galerie</a></li>
+      <li><a href="reservering.html" class="active">Reserveren</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html" class="navbar__cta">Beheer</a></li>
+    </ul>
+    <div class="navbar__toggle"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="res-page">
+    <div class="res-hero">
+      <h1>Reserveer een Tafel</h1>
+      <p>Reserveer eenvoudig online – we zorgen voor de rest</p>
+    </div>
+
+    <section class="section">
+      <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:3rem; max-width:1100px; margin:0 auto; align-items:start;">
+
+        <!-- Info blok -->
+        <div>
+          <h3 style="font-family:var(--font-display); font-size:1.8rem; color:var(--bruin); margin-bottom:1.5rem;">Praktische Info</h3>
+
+          <div class="contact-item">
+            <div class="contact-item__icon">📍</div>
+            <div>
+              <div class="contact-item__label">Adres</div>
+              <div class="contact-item__val">Keizersstraat 42, 1012 Amsterdam</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">📞</div>
+            <div>
+              <div class="contact-item__label">Telefonisch Reserveren</div>
+              <div class="contact-item__val">020 – 123 45 67</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">🕐</div>
+            <div>
+              <div class="contact-item__label">Openingstijden</div>
+              <div class="contact-item__val">
+                <table class="hours-table" style="margin-top:.5rem;">
+                  <tr><td>Maandag – Vrijdag</td><td>11:00 – 22:00</td></tr>
+                  <tr><td>Zaterdag</td><td>11:00 – 23:00</td></tr>
+                  <tr><td>Zondag</td><td>12:00 – 21:00</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item__icon">ℹ️</div>
+            <div>
+              <div class="contact-item__label">Let op</div>
+              <div class="contact-item__val">Reserveringen worden bevestigd via e-mail of telefoon. Kom te laat? Bel ons!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reserveringsformulier -->
+        <div class="reservation-form-wrap">
+          <h3 style="font-family:var(--font-display); font-size:1.8rem; color:var(--bruin); margin-bottom:.5rem;">Online Reserveren</h3>
+          <p style="color:#6b5449; font-size:.9rem; margin-bottom:1.5rem;">Vul het formulier in en wij bevestigen uw reservering.</p>
+
+          <div class="success-msg" id="successMsg">
+            ✅ Uw reservering is ontvangen! Wij nemen zo snel mogelijk contact op ter bevestiging.
+          </div>
+
+          <form id="reserveringForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-naam">Volledige naam *</label>
+                <input type="text" id="res-naam" class="form-control" placeholder="bijv. Ahmed Yıldız" required>
+              </div>
+              <div class="form-group">
+                <label for="res-tel">Telefoonnummer *</label>
+                <input type="tel" id="res-tel" class="form-control" placeholder="06 – 1234 5678" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="res-email">E-mailadres *</label>
+              <input type="email" id="res-email" class="form-control" placeholder="uw@email.nl" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-datum">Datum *</label>
+                <input type="date" id="res-datum" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="res-tijd">Tijdstip *</label>
+                <select id="res-tijd" class="form-control" required>
+                  <option value="">Kies een tijd</option>
+                  <option>12:00</option>
+                  <option>12:30</option>
+                  <option>13:00</option>
+                  <option>13:30</option>
+                  <option>18:00</option>
+                  <option>18:30</option>
+                  <option>19:00</option>
+                  <option>19:30</option>
+                  <option>20:00</option>
+                  <option>20:30</option>
+                  <option>21:00</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="res-personen">Aantal Personen *</label>
+              <select id="res-personen" class="form-control" required>
+                <option value="">Kies aantal gasten</option>
+                <option>1 persoon</option>
+                <option>2 personen</option>
+                <option>3 personen</option>
+                <option>4 personen</option>
+                <option>5 personen</option>
+                <option>6 personen</option>
+                <option>7 personen</option>
+                <option>8 personen</option>
+                <option>Meer dan 8 (groepsreservering)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="res-wensen">Bijzondere wensen</label>
+              <textarea id="res-wensen" class="form-control" rows="3" placeholder="Bijv. verjaardag, allergiëen, kinderstoel nodig..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center;">
+              Bevestig Reservering →
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__grid">
+      <div><div class="footer__brand-name">Baba<span>Döner</span></div><p class="footer__about">Authentieke Turkse keuken.</p></div>
+      <div><h4>Navigatie</h4><ul><li><a href="../index.html">Home</a></li><li><a href="menu.html">Menu</a></li><li><a href="galerie.html">Galerie</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a>📞 020 – 123 45 67</a></li><li><a>📍 Keizersstraat 42, Amsterdam</a></li></ul></div>
+      <div><h4>Openingstijden</h4><ul><li><a>Ma–Vr: 11:00–22:00</a></li><li><a>Za: 11:00–23:00</a></li><li><a>Zo: 12:00–21:00</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>&copy; 2024 Baba Döner</span></div>
+  </footer>
+
+  <script>
+    // Minimum datum = vandaag
+    document.getElementById('res-datum').min = new Date().toISOString().split('T')[0];
+
+    document.getElementById('reserveringForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('successMsg').style.display = 'block';
+      this.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
