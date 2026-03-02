@@ -1,17 +1,17 @@
 // ─────────────── DATA ───────────────
 let menuItems = [
-  {id:1, name:'Döner Kebab Classic', cat:'döner', price:10.50, desc:'Malse vleesschijven van het spit, met salade, tomaat en tzatziki in vers pide brood.', badge:'Bestseller', img:''},
-  {id:2, name:'Döner Box Deluxe', cat:'döner', price:13.50, desc:'Ruime box met döner, bulgursalade, geroosterde groenten, hummus en drie sauzen.', badge:'Nieuw', img:''},
-  {id:3, name:'Döner Schotel', cat:'döner', price:15.00, desc:'Royale schotel met rijst, lavas brood, döner vlees en verse salades.', badge:'', img:''},
-  {id:4, name:'Adana Kebab', cat:'kebab', price:16.50, desc:'Pittige gemalen lamsgehakt aan het spit, geserveerd met bulgur en geroosterde paprika.', badge:'', img:''},
-  {id:5, name:'Şiş Kebab', cat:'kebab', price:17.00, desc:'Malse lamsblokjes gemarineerd in Anatolische kruiden, gegrild aan de spies.', badge:"Chef's keuze", img:''},
-  {id:6, name:'Izgara Köfte', cat:'kebab', price:14.00, desc:'Huisgemaakte köfte van gemengd gehakt met peterselie en specerijen.', badge:'', img:''},
-  {id:7, name:'Meze Schotel (4 pers)', cat:'meze', price:19.50, desc:'Hummus, babaganoush, ezme, dolma, beyaz peynir, zeitunen en vers pide brood.', badge:'Deel samen', img:''},
-  {id:8, name:'Mercimek Çorbası', cat:'meze', price:6.50, desc:'Traditionele Turkse rode linzensoep met citroen en munt.', badge:'', img:''},
-  {id:9, name:'Kaşarlı Pide', cat:'pide', price:13.00, desc:'Bootvorming pide gevuld met gesmolten kaşar kaas en verse kruiden.', badge:'', img:''},
-  {id:10, name:'Karışık Pide', cat:'pide', price:15.50, desc:'Gevuld met gehakt, kaas, groenten en ei — het allerbeste van onze pide-oven.', badge:'Populair', img:''},
-  {id:11, name:'Baklava (3 stuks)', cat:'dessert', price:7.50, desc:'Knapperig filodeeg met walnoten, gedrenkt in oranjebloesemhoning.', badge:'Huisgemaakt', img:''},
-  {id:12, name:'Çay (Turkse Thee)', cat:'drank', price:2.50, desc:'Authentieke Turkse zwarte thee, geserveerd in traditioneel çay-glas.', badge:'', img:''},
+  { id: 1, name: 'Döner Kebab Classic', cat: 'döner', price: 10.50, desc: 'Malse vleesschijven van het spit, met salade, tomaat en tzatziki in vers pide brood.', badge: 'Bestseller', img: '' },
+  { id: 2, name: 'Döner Box Deluxe', cat: 'döner', price: 13.50, desc: 'Ruime box met döner, bulgursalade, geroosterde groenten, hummus en drie sauzen.', badge: 'Nieuw', img: '' },
+  { id: 3, name: 'Döner Schotel', cat: 'döner', price: 15.00, desc: 'Royale schotel met rijst, lavas brood, döner vlees en verse salades.', badge: '', img: '' },
+  { id: 4, name: 'Adana Kebab', cat: 'kebab', price: 16.50, desc: 'Pittige gemalen lamsgehakt aan het spit, geserveerd met bulgur en geroosterde paprika.', badge: '', img: '' },
+  { id: 5, name: 'Şiş Kebab', cat: 'kebab', price: 17.00, desc: 'Malse lamsblokjes gemarineerd in Anatolische kruiden, gegrild aan de spies.', badge: "Chef's keuze", img: '' },
+  { id: 6, name: 'Izgara Köfte', cat: 'kebab', price: 14.00, desc: 'Huisgemaakte köfte van gemengd gehakt met peterselie en specerijen.', badge: '', img: '' },
+  { id: 7, name: 'Meze Schotel (4 pers)', cat: 'meze', price: 19.50, desc: 'Hummus, babaganoush, ezme, dolma, beyaz peynir, zeitunen en vers pide brood.', badge: 'Deel samen', img: '' },
+  { id: 8, name: 'Mercimek Çorbası', cat: 'meze', price: 6.50, desc: 'Traditionele Turkse rode linzensoep met citroen en munt.', badge: '', img: '' },
+  { id: 9, name: 'Kaşarlı Pide', cat: 'pide', price: 13.00, desc: 'Bootvorming pide gevuld met gesmolten kaşar kaas en verse kruiden.', badge: '', img: '' },
+  { id: 10, name: 'Karışık Pide', cat: 'pide', price: 15.50, desc: 'Gevuld met gehakt, kaas, groenten en ei — het allerbeste van onze pide-oven.', badge: 'Populair', img: '' },
+  { id: 11, name: 'Baklava (3 stuks)', cat: 'dessert', price: 7.50, desc: 'Knapperig filodeeg met walnoten, gedrenkt in oranjebloesemhoning.', badge: 'Huisgemaakt', img: '' },
+  { id: 12, name: 'Çay (Turkse Thee)', cat: 'drank', price: 2.50, desc: 'Authentieke Turkse zwarte thee, geserveerd in traditioneel çay-glas.', badge: '', img: '' },
 ];
 
 let cart = [];
