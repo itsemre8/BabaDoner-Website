@@ -1,1044 +1,116 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Baba Döner – Authentiek Anatolisch Restaurant</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --goud: #C9A84C;
-      --donker: #1a1208;
-      --bruin: #3d2b1a;
-      --zand: #f5ede0;
-      --licht-zand: #fdf8f2;
-      --terracotta: #b05a3a;
-      --wit: #fff;
-      --turkoois: #2a7a7a;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Crimson Pro', Georgia, serif;
-      background: var(--licht-zand);
-      color: var(--bruin);
-      font-size: 18px;
-    }
-
-    /* ── NAVBAR ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(26,18,8,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(201,168,76,0.3);
-    }
-    .nav-inner {
-      max-width: 1300px; margin: auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem; height: 68px;
-    }
-    .nav-logo {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 1.4rem; color: var(--wit); letter-spacing: 0.05em;
-    }
-    .nav-logo span { color: var(--goud); }
-    .nav-links {
-      list-style: none; display: flex; gap: 2rem;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.8); text-decoration: none;
-      font-family: 'Cinzel', serif; font-size: 0.75rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--goud); }
-
-    /* ── BUTTONS ── */
-    .btn-primary {
-      background: var(--goud); color: var(--donker);
-      border: none; padding: 0.85rem 2.2rem;
-      font-family: 'Cinzel', serif; font-size: 0.75rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      cursor: pointer; transition: all 0.3s;
-      text-decoration: none; display: inline-block;
-    }
-    .btn-primary:hover { background: #e0bb5a; transform: translateY(-1px); }
-    .btn-outline {
-      background: transparent; color: var(--wit);
-      border: 1px solid rgba(255,255,255,0.5);
-      padding: 0.85rem 2.2rem;
-      font-family: 'Cinzel', serif; font-size: 0.75rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      cursor: pointer; transition: all 0.3s;
-      text-decoration: none; display: inline-block;
-    }
-    .btn-outline:hover { border-color: var(--goud); color: var(--goud); }
-
-    /* ── SECTION HELPERS ── */
-    .section { padding: 6rem 0; }
-    .section-sand { background: var(--zand); }
-    .container { max-width: 1300px; margin: auto; padding: 0 2rem; }
-    .section-header { text-align: center; margin-bottom: 3.5rem; }
-    .section-label {
-      font-family: 'Cinzel', serif; font-size: 0.7rem;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--goud); margin-bottom: 0.75rem;
-    }
-    .section-title {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-      color: var(--bruin); line-height: 1.25;
-    }
-    .divider {
-      text-align: center; color: var(--goud);
-      font-size: 1.5rem; margin: 1.5rem 0;
-    }
-
-    /* ─────────── HOME PAGE ─────────── */
-
-    /* HERO */
-    .hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; background: var(--donker);
-    }
-    .hero-img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%; object-fit: cover;
-      opacity: 0.4;
-    }
-    .hero-pattern {
-      position: absolute; inset: 0; opacity: 0.07;
-      background-image: repeating-linear-gradient(
-        45deg, var(--goud) 0, var(--goud) 1px, transparent 0, transparent 50%);
-      background-size: 20px 20px;
-    }
-    .hero-content {
-      position: relative; text-align: center; z-index: 2;
-      padding: 2rem;
-    }
-    .hero-subtitle {
-      font-family: 'Cinzel', serif; font-size: 0.75rem;
-      letter-spacing: 0.3em; color: var(--goud);
-      margin-bottom: 1.2rem;
-    }
-    .hero-title {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: clamp(3rem, 8vw, 7rem);
-      color: var(--wit); line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    .hero-title .accent { color: var(--goud); }
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      color: rgba(255,255,255,0.75); font-style: italic;
-      margin-bottom: 2.5rem;
-    }
-    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    /* FEATURED */
-    .featured-grid {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      grid-template-rows: 280px 280px;
-      gap: 1rem;
-    }
-    .featured-main {
-      grid-row: 1 / 3; position: relative; overflow: hidden;
-    }
-    .featured-main img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s; }
-    .featured-main:hover img { transform: scale(1.04); }
-    .featured-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(26,18,8,0.9));
-      padding: 2rem; color: var(--wit);
-    }
-    .featured-overlay h3 {
-      font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 0.4rem;
-    }
-    .featured-overlay p { font-size: 0.95rem; opacity: 0.85; }
-    .featured-side { position: relative; overflow: hidden; }
-    .featured-side img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s; }
-    .featured-side:hover img { transform: scale(1.04); }
-    .featured-side-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(26,18,8,0.85));
-      padding: 1rem 1.5rem; color: var(--wit);
-    }
-    .featured-side-overlay h4 { font-family: 'Cinzel', serif; }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
-    }
-    .about-image img {
-      width: 100%; height: 500px; object-fit: cover;
-      display: block;
-    }
-    .about-text p {
-      line-height: 1.9; color: #5a4030; margin-bottom: 1.2rem;
-    }
-    .about-stats {
-      display: flex; gap: 2.5rem; margin-top: 2rem;
-    }
-    .stat-num {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 2.2rem; color: var(--goud);
-    }
-    .stat-label {
-      font-family: 'Cinzel', serif; font-size: 0.7rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: #8a6a50; margin-top: 0.2rem;
-    }
-
-    /* VIDEO SECTION */
-    .video-section {
-      background: var(--donker); padding: 6rem 0;
-    }
-    .video-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;
-    }
-    .video-wrap { display: flex; flex-direction: column; gap: 0.75rem; }
-    .video-placeholder {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(201,168,76,0.2);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 1rem; color: rgba(255,255,255,0.4);
-      font-family: 'Cinzel', serif; font-size: 0.75rem;
-      letter-spacing: 0.1em; text-align: center;
-      aspect-ratio: 16/9;
-    }
-    .video-placeholder.main { grid-column: 1/-1; aspect-ratio: 16/7; }
-    .video-play-btn {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: rgba(201,168,76,0.2);
-      border: 1px solid var(--goud);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; color: var(--goud);
-    }
-    .video-title {
-      font-family: 'Cinzel', serif; font-size: 0.7rem;
-      letter-spacing: 0.2em; color: rgba(201,168,76,0.7);
-      text-align: center;
-    }
-
-    /* HOURS */
-    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-    .hour-row {
-      display: flex; justify-content: space-between;
-      padding: 0.6rem 0; border-bottom: 1px solid rgba(61,43,26,0.1);
-    }
-    .hour-day { font-weight: 600; }
-    .hour-time { color: var(--goud); font-style: italic; }
-
-    .contact-info-item {
-      display: flex; gap: 1rem; align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .contact-icon { font-size: 1.3rem; margin-top: 0.1rem; }
-    .contact-info-text h4 {
-      font-family: 'Cinzel', serif; font-size: 0.8rem;
-      letter-spacing: 0.08em; margin-bottom: 0.2rem;
-    }
-    .contact-info-text p { color: #5a4030; line-height: 1.6; }
-
-    /* ─────────── MENU PAGE ─────────── */
-    .menu-hero {
-      position: relative; height: 350px;
-      background: var(--donker);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .menu-hero-content { position: relative; z-index: 2; text-align: center; }
-
-    .menu-controls {
-      background: var(--wit); padding: 2rem;
-      display: flex; flex-direction: column; gap: 1.5rem;
-      align-items: center; border-bottom: 1px solid var(--zand);
-    }
-    .category-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
-    .cat-tab {
-      background: none; border: 1px solid rgba(61,43,26,0.2);
-      color: var(--bruin); padding: 0.5rem 1.2rem;
-      font-family: 'Cinzel', serif; font-size: 0.7rem;
-      letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s;
-      text-transform: uppercase;
-    }
-    .cat-tab:hover, .cat-tab.active {
-      background: var(--goud); border-color: var(--goud);
-      color: var(--donker);
-    }
-
-    .menu-section { padding: 3rem 2rem; max-width: 1300px; margin: auto; }
-    .menu-section-title {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 1.6rem; color: var(--bruin);
-      margin: 3rem 0 1.5rem; padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--goud);
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .menu-card {
-      background: var(--wit); overflow: hidden;
-      border: 1px solid rgba(61,43,26,0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .menu-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(61,43,26,0.12);
-    }
-    .menu-card-img {
-      width: 100%; height: 200px; object-fit: cover;
-      display: block; background: var(--zand);
-    }
-    .menu-card-img-placeholder {
-      width: 100%; height: 200px; background: var(--zand);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
-    .menu-card-body { padding: 1.25rem; }
-    .menu-card-top {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; margin-bottom: 0.5rem;
-    }
-    .menu-card-name {
-      font-family: 'Cinzel', serif; font-size: 1rem;
-      letter-spacing: 0.04em; color: var(--bruin);
-    }
-    .menu-card-price {
-      font-family: 'Cinzel Decorative', cursive;
-      color: var(--goud); font-size: 1.1rem;
-      white-space: nowrap;
-    }
-    .menu-card-desc {
-      font-size: 0.9rem; color: #7a5a40;
-      line-height: 1.6; margin-bottom: 0.75rem;
-    }
-    .badge {
-      display: inline-block; padding: 0.2rem 0.6rem;
-      font-family: 'Cinzel', serif; font-size: 0.6rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      background: var(--goud); color: var(--donker);
-      margin-bottom: 0.5rem;
-    }
-    .badge.veg { background: #4a8a4a; color: var(--wit); }
-    .badge.nieuw { background: var(--terracotta); color: var(--wit); }
-
-    /* ─────────── GALLERY PAGE ─────────── */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 250px;
-      gap: 1rem;
-    }
-    .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
-    .gallery-item img { width:100%; height:100%; object-fit:cover; transition: transform 0.5s; }
-    .gallery-item:hover img { transform: scale(1.06); }
-    .gallery-placeholder {
-      width: 100%; height: 100%; background: var(--zand);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 0.5rem; color: #aaa; font-size: 2.5rem;
-    }
-    .gallery-placeholder span { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.1em; }
-    .gallery-overlay {
-      position: absolute; inset: 0;
-      background: rgba(26,18,8,0);
-      display: flex; align-items: flex-end; padding: 1.5rem;
-      transition: background 0.3s;
-    }
-    .gallery-overlay-text {
-      font-family: 'Cinzel', serif; font-size: 0.75rem;
-      letter-spacing: 0.2em; color: var(--wit); opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .gallery-item:hover .gallery-overlay { background: rgba(26,18,8,0.5); }
-    .gallery-item:hover .gallery-overlay-text { opacity: 1; }
-    .gallery-item.wide { grid-column: span 2; }
-    .gallery-item.tall { grid-row: span 2; }
-
-    /* ─────────── CONTACT PAGE ─────────── */
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: start;
-    }
-    .contact-form-wrap {
-      background: var(--wit); padding: 3rem;
-      border: 1px solid rgba(61,43,26,0.08);
-    }
-    .form-title {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 1.6rem; color: var(--bruin); margin-bottom: 0.5rem;
-    }
-    .form-subtitle {
-      color: #7a5a40; margin-bottom: 2rem; font-style: italic;
-    }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label {
-      display: block; font-family: 'Cinzel', serif;
-      font-size: 0.7rem; letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 0.5rem; color: var(--bruin);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: 0.8rem 1rem;
-      border: 1px solid rgba(61,43,26,0.2);
-      background: var(--licht-zand); font-family: 'Crimson Pro', serif;
-      font-size: 1rem; color: var(--bruin); outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--goud); }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .map-placeholder {
-      width: 100%; height: 250px; background: var(--zand);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      border: 1px solid rgba(61,43,26,0.1); margin-top: 2rem;
-      color: #aaa; gap: 0.5rem; font-family: 'Cinzel', serif;
-      font-size: 0.7rem; letter-spacing: 0.1em;
-    }
-
-    /* ─────────── RESERVATION PAGE ─────────── */
-    .reservation-section {
-      display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
-    }
-    .reservation-image img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
-    .reservation-form-wrap {
-      padding: 5rem 4rem; background: var(--licht-zand);
-      display: flex; flex-direction: column; justify-content: center;
-    }
-
-    /* ─────────── FOOTER ─────────── */
-    footer { background: var(--donker); padding: 5rem 2rem 0; }
-    .footer-grid {
-      max-width: 1300px; margin: auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem; padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-    }
-    .footer-logo {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 1.6rem; color: var(--wit); margin-bottom: 1rem;
-    }
-    .footer-logo span { color: var(--goud); }
-    .footer-brand p { color: rgba(255,255,255,0.5); line-height: 1.8; font-size: 0.95rem; }
-    .footer-col h4 {
-      font-family: 'Cinzel', serif; font-size: 0.7rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--goud); margin-bottom: 1rem;
-    }
-    .footer-col a, .footer-col p {
-      display: block; color: rgba(255,255,255,0.5);
-      font-size: 0.95rem; line-height: 2; text-decoration: none;
-    }
-    .footer-col a:hover { color: var(--goud); }
-    .footer-bottom {
-      max-width: 1300px; margin: auto;
-      padding: 1.5rem 0;
-      display: flex; justify-content: space-between;
-      color: rgba(255,255,255,0.3);
-      font-family: 'Cinzel', serif; font-size: 0.65rem;
-      letter-spacing: 0.1em;
-    }
-
-    /* ─────────── TAB NAVIGATION (pure CSS) ─────────── */
-    .tab-target { display: none; }
-    .tab-target:target { display: block; }
-    #home-page { display: block; }
-
-    /* Hide all pages by default, show via :target */
-    .page-section { display: none; }
-    .page-section:target,
-    .page-section:target ~ #fallback-home { display: none; }
-
-    /* Simple approach: use anchor links + CSS :target */
-    [id^="page-"]:not(:target) { display: none; }
-    #page-home { display: block; }
-    #page-home:target { display: block; }
-    #page-menu:target { display: block; }
-    #page-gallery:target { display: block; }
-    #page-contact:target { display: block; }
-    #page-reservation:target { display: block; }
-
-    /* When any other page is targeted, hide home */
-    body:has(#page-menu:target) #page-home,
-    body:has(#page-gallery:target) #page-home,
-    body:has(#page-contact:target) #page-home,
-    body:has(#page-reservation:target) #page-home { display: none; }
-
-    /* Active nav highlight */
-    body:has(#page-menu:target) a[href="#page-menu"],
-    body:has(#page-gallery:target) a[href="#page-gallery"],
-    body:has(#page-contact:target) a[href="#page-contact"],
-    body:has(#page-reservation:target) a[href="#page-reservation"] {
-      color: var(--goud);
-    }
-
-    /* ─── Responsive ─── */
-    @media (max-width: 900px) {
-      .featured-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .featured-main { grid-row: auto; height: 350px; }
-      .featured-side { height: 220px; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .reservation-section { grid-template-columns: 1fr; }
-      .reservation-image { height: 300px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .video-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-item.wide, .gallery-item.tall { grid-column: auto; grid-row: auto; }
-      .footer-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- ─── NAVBAR ─── -->
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="#page-home">Baba <span>Döner</span></a>
-    <ul class="nav-links">
-      <li><a href="#page-home">Home</a></li>
-      <li><a href="#page-menu">Menu</a></li>
-      <li><a href="#page-gallery">Galerij</a></li>
-      <li><a href="#page-contact">Contact</a></li>
-      <li><a href="#page-reservation">Reserveren</a></li>
-    </ul>
-  </div>
-</nav>
-
-
-<!-- ══════════════════════════════
-     HOME PAGE
-══════════════════════════════ -->
-<div id="page-home">
-
-  <!-- HERO -->
-  <section class="hero">
-    <img class="hero-img"
-      src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80&fit=crop"
-      alt="Restaurant interieur">
-    <div class="hero-pattern"></div>
-    <div class="hero-content">
-      <div class="hero-subtitle">✦ Authentiek Anatolisch ✦</div>
-      <h1 class="hero-title">Baba <span class="accent">Döner</span></h1>
-      <p class="hero-tagline">Waar elke hap een reis naar Anatolië is</p>
-      <div class="hero-ctas">
-        <a class="btn-primary" href="#page-menu">Bekijk Menu</a>
-        <a class="btn-outline" href="#page-reservation">Reserveer Nu</a>
-      </div>
+  <!-- ─── NAVBAR ─── -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#page-home">Baba <span>Döner</span></a>
+      <ul class="nav-links">
+        <li><a href="#page-home">Home</a></li>
+        <li><a href="#page-menu">Menu</a></li>
+        <li><a href="#page-gallery">Galerij</a></li>
+        <li><a href="#page-contact">Contact</a></li>
+        <li><a href="#page-reservation">Reserveren</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- FEATURED DISHES -->
-  <section class="section section-sand">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">✦ Onze specialiteiten ✦</div>
-        <h2 class="section-title">Signature Gerechten</h2>
-      </div>
-      <div class="featured-grid">
-        <div class="featured-main">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&fit=crop&crop=center" alt="Döner Kebab Deluxe">
-          <div class="featured-overlay">
-            <h3>Döner Kebab Deluxe</h3>
-            <p>Het kroonstuk van Baba Döner — gegaard aan het spit gedurende 8 uur</p>
-          </div>
-        </div>
-        <div class="featured-side">
-          <img src="pictures/adanakebap.jpg" alt="Adana Kebab"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="menu-card-img-placeholder" style="display:none">🍢</div>
-          <div class="featured-side-overlay"><h4>Adana Kebab</h4></div>
-        </div>
-        <div class="featured-side">
-          <img src="pictures/meze.png" alt="Meze"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="menu-card-img-placeholder" style="display:none">🥗</div>
-          <div class="featured-side-overlay"><h4>Meze</h4></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80&fit=crop&crop=center"
-            alt="Restaurant interieur Baba Döner">
-        </div>
-        <div class="about-text">
-          <div class="section-label">✦ Ons verhaal ✦</div>
-          <h2 class="section-title">Meer dan 20 jaar<br>smaak & traditie</h2>
-          <div class="divider">❧</div>
-          <p>Baba Döner begon als een droom van één familie — de authentieke smaken van Centraal-Anatolië naar Nederland brengen. Met recepten die van generatie op generatie zijn doorgegeven, bereiden wij elk gerecht met liefde en respect voor de traditie.</p>
-          <p>Van de malse döner die uren aan het spit draait, tot onze huisgemaakte mezes en versgebakken pide — alles wordt met verse, lokale ingrediënten bereid.</p>
-          <div class="about-stats">
-            <div class="stat">
-              <div class="stat-num">20+</div>
-              <div class="stat-label">Jaren Ervaring</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">50+</div>
-              <div class="stat-label">Gerechten</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">∞</div>
-              <div class="stat-label">Passie</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VIDEO -->
-  <div class="video-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label" style="color:var(--goud)">✦ Behind the scenes ✦</div>
-        <h2 class="section-title" style="color:var(--zand)">Beleef Baba Döner</h2>
-      </div>
-      <div class="video-grid">
-        <div class="video-wrap" style="grid-column:1/-1">
-          <div class="video-placeholder main">
-            <div class="video-play-btn">▶</div>
-            <div>Restaurant sfeer / chef aan het werk</div>
-          </div>
-          <div class="video-title">✦ DE KUNST VAN DÖNER BEREIDEN ✦</div>
-        </div>
-        <div class="video-wrap">
-          <div class="video-placeholder">
-            <div class="video-play-btn">▶</div>
-            <div>Keukentour</div>
-          </div>
-          <div class="video-title">✦ ONZE KEUKEN ✦</div>
-        </div>
-        <div class="video-wrap">
-          <div class="video-placeholder">
-            <div class="video-play-btn">▶</div>
-            <div>Klantervaringen</div>
-          </div>
-          <div class="video-title">✦ KLANTERVARINGEN ✦</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HOURS -->
-  <section class="section section-sand">
-    <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
-        <div>
-          <div class="section-label">✦ Openingstijden ✦</div>
-          <h2 class="section-title" style="margin-bottom:2rem">Wanneer kunt u<br>ons bezoeken</h2>
-          <div class="hours-grid">
-            <div>
-              <div class="hour-row"><span class="hour-day">Maandag</span><span class="hour-time">11:00 – 22:00</span></div>
-              <div class="hour-row"><span class="hour-day">Dinsdag</span><span class="hour-time">11:00 – 22:00</span></div>
-              <div class="hour-row"><span class="hour-day">Woensdag</span><span class="hour-time">11:00 – 22:00</span></div>
-              <div class="hour-row"><span class="hour-day">Donderdag</span><span class="hour-time">11:00 – 23:00</span></div>
-            </div>
-            <div>
-              <div class="hour-row"><span class="hour-day">Vrijdag</span><span class="hour-time">11:00 – 00:00</span></div>
-              <div class="hour-row"><span class="hour-day">Zaterdag</span><span class="hour-time">12:00 – 00:00</span></div>
-              <div class="hour-row"><span class="hour-day">Zondag</span><span class="hour-time">12:00 – 22:00</span></div>
-            </div>
-          </div>
-          <div style="margin-top:2rem">
-            <a class="btn-primary" href="#page-reservation">Reserveer Een Tafel</a>
-          </div>
-        </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80&fit=crop&crop=center"
-            alt="Restaurant" style="width:100%;height:350px;object-fit:cover;display:block">
-          <div style="margin-top:1.5rem">
-            <div class="contact-info-item">
-              <div class="contact-icon">📍</div>
-              <div class="contact-info-text">
-                <h4>Adres</h4>
-                <p>Anatoliastraat 42<br>1234 AB Amsterdam</p>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-icon">📞</div>
-              <div class="contact-info-text">
-                <h4>Telefoon</h4>
-                <p>+31 20 123 4567</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">Baba <span>Döner</span></div>
-        <p>Authentieke Anatolische smaken in het hart van Nederland. Tradities bewaard, voor elke generatie opnieuw beleefd.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigatie</h4>
-        <a href="#page-home">Home</a>
-        <a href="#page-menu">Menu</a>
-        <a href="#page-gallery">Galerij</a>
-        <a href="#page-contact">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Anatoliastraat 42</p>
-        <p>Amsterdam</p>
-        <p>+31 20 123 4567</p>
-        <p>info@babadoner.nl</p>
-      </div>
-      <div class="footer-col">
-        <h4>Openingstijden</h4>
-        <p>Ma–Do: 11:00–22:00</p>
-        <p>Vr: 11:00–00:00</p>
-        <p>Za: 12:00–00:00</p>
-        <p>Zo: 12:00–22:00</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Baba Döner. Alle rechten voorbehouden.</span>
-      <span>✦ Met liefde gemaakt vanuit Anatolië ✦</span>
-    </div>
-  </footer>
-</div>
+  </nav>
 
 
-<!-- ══════════════════════════════
-     MENU PAGE
-══════════════════════════════ -->
-<div id="page-menu">
-  <div style="margin-top:70px">
-    <div class="menu-hero" style="background:var(--donker)">
-      <div class="hero-pattern" style="opacity:0.07"></div>
-      <div class="menu-hero-content">
-        <div class="hero-subtitle">✦ Authentiek & Vers ✦</div>
-        <h1 style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2rem,5vw,4rem);color:var(--wit)">Onze Menukaart</h1>
-      </div>
-    </div>
+  <!-- ══════════════════════════════ HOME ══════════════════════════════ -->
+  <div id="page-home">
 
-    <div class="menu-controls">
-      <div class="category-tabs">
-        <a class="cat-tab active" href="#page-menu">Alles</a>
-        <a class="cat-tab" href="#menu-doner">Döner</a>
-        <a class="cat-tab" href="#menu-kebab">Kebab</a>
-        <a class="cat-tab" href="#menu-meze">Meze</a>
-        <a class="cat-tab" href="#menu-pide">Pide</a>
-        <a class="cat-tab" href="#menu-dessert">Dessert</a>
-        <a class="cat-tab" href="#menu-drank">Dranken</a>
-      </div>
-    </div>
-
-    <div class="menu-section">
-
-      <!-- DÖNER -->
-      <div id="menu-doner" class="menu-section-title">🥙 Döner</div>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <img class="menu-card-img" src="https://images.unsplash.com/photo-1561651823-34feb02250e4?w=600&q=80&fit=crop" alt="Döner Kebab Deluxe">
-          <div class="menu-card-body">
-            <div class="badge">Bestseller</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Döner Kebab Deluxe</div>
-              <div class="menu-card-price">€13,50</div>
-            </div>
-            <p class="menu-card-desc">Malse döner gegaard aan het spit, geserveerd met verse salade, tomaat en huisgemaakte saus.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/donerschotel.png" alt="Döner Schotel">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Döner Schotel</div>
-              <div class="menu-card-price">€15,00</div>
-            </div>
-            <p class="menu-card-desc">Rijkelijk belegde döner schotel met rijst, gegrilde groenten en tzatziki.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/durum-et-doner_b.png" alt="Döner Wrap">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Döner Wrap</div>
-              <div class="menu-card-price">€10,50</div>
-            </div>
-            <p class="menu-card-desc">Verse wrap gevuld met döner, sla, ui, tomaat en speciale saus.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- KEBAB -->
-      <div id="menu-kebab" class="menu-section-title">🍢 Kebab</div>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/adanakebap.jpg" alt="Adana Kebab"
-            onerror="this.style.background='var(--zand)';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.innerHTML='🍢'">
-          <div class="menu-card-body">
-            <div class="badge nieuw">Specialiteit</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Adana Kebab</div>
-              <div class="menu-card-price">€16,50</div>
-            </div>
-            <p class="menu-card-desc">Pittig gehakt lam op houtskool, geserveerd met flatbread en gegrilde paprika.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-         <img class="menu-card-img" src="pictures/urfakebap.webp" alt="Urfa Kebab">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Urfa Kebab</div>
-              <div class="menu-card-price">€16,50</div>
-            </div>
-            <p class="menu-card-desc">Zachte urfa kebab met subtiele kruiden, geserveerd met rijst en salade.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/tavuksis.jpg" alt="Tavuk Şiş">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Tavuk Şiş</div>
-              <div class="menu-card-price">€14,50</div>
-            </div>
-            <p class="menu-card-desc">Gemarineerde kip spiesjes van de houtskoolbarbecue, met yoghurtsaus.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- MEZE -->
-      <div id="menu-meze" class="menu-section-title">🥗 Meze</div>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/meze.png" alt="Meze Schotel"
-            onerror="this.style.display='none'">
-          <div class="menu-card-body">
-            <div class="badge veg">Vegetarisch</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Gemengde Meze</div>
-              <div class="menu-card-price">€12,00</div>
-            </div>
-            <p class="menu-card-desc">Selectie van hummus, baba ghanoush, cacık en gegrilde aubergine.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/hummus.jpg" alt="Hummus">
-          <div class="menu-card-body">
-            <div class="badge veg">Vegetarisch</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Hummus</div>
-              <div class="menu-card-price">€7,50</div>
-            </div>
-            <p class="menu-card-desc">Huisgemaakte hummus met olijfolie, paprikapoeder en versgebakken pide.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/Cacik.png" alt="Cacık">
-          <div class="menu-card-body">
-            <div class="badge veg">Vegetarisch</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Cacık</div>
-              <div class="menu-card-price">€6,00</div>
-            </div>
-            <p class="menu-card-desc">Verse Turkse yoghurt met komkommer, knoflook en munt.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- PIDE -->
-      <div id="menu-pide" class="menu-section-title">🍞 Pide</div>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/kasarli-pide.jpg" alt="Kaşarlı Pide">
-          <div class="menu-card-body">
-            <div class="badge">Favoriet</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Kaşarlı Pide</div>
-              <div class="menu-card-price">€11,00</div>
-            </div>
-            <p class="menu-card-desc">Turkse bootpizza met gesmolten kaşar kaas, vers uit de steenoven.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-         <img class="menu-card-img" src="pictures/kiymali-pide.jpg.webp" alt="Kıymalı Pide">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Kıymalı Pide</div>
-              <div class="menu-card-price">€13,00</div>
-            </div>
-            <p class="menu-card-desc">Pide met gekruid gehakt, ui, tomaat en verse peterselie.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/kasarli-yumurtali-pide-518c-c.jpg" alt="Yumurtalı Pide">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Yumurtalı Pide</div>
-              <div class="menu-card-price">€12,00</div>
-            </div>
-            <p class="menu-card-desc">Pide met ei, sucuk worstjes en kaas — een klassiek Anatolisch ontbijt.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- DESSERT -->
-      <div id="menu-dessert" class="menu-section-title">🍯 Dessert</div>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/Baklava(1).png" alt="Baklava">
-          <div class="menu-card-body">
-            <div class="badge">Huisgemaakt</div>
-            <div class="menu-card-top">
-              <div class="menu-card-name">Baklava</div>
-              <div class="menu-card-price">€6,50</div>
-            </div>
-            <p class="menu-card-desc">Knapperig deeg gevuld met pistache en honing, recept van grootmoeder.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/sutlac.webp" alt="Sütlaç">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Sütlaç</div>
-              <div class="menu-card-price">€5,50</div>
-            </div>
-            <p class="menu-card-desc">Traditionele Turkse rijstepudding, koud geserveerd met kaneelpoeder.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/kunefe.jpg" alt="Künefe">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Künefe</div>
-              <div class="menu-card-price">€8,00</div>
-            </div>
-            <p class="menu-card-desc">Warme kadayıf met smeltende kaas en suikersiroop, bestrooid met pistache.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- DRANKEN -->
-      <div id="menu-drank" class="menu-section-title">☕ Dranken</div>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/turkse thee.jpg" alt="turkse thee">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Turkse Thee</div>
-              <div class="menu-card-price">€2,50</div>
-            </div>
-            <p class="menu-card-desc">Traditionele çay geserveerd in klassiek tulpglas, sterk en aromatisch.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/ayran.webp" alt="ayran">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Ayran</div>
-              <div class="menu-card-price">€3,00</div>
-            </div>
-            <p class="menu-card-desc">Gezouten yoghurtdrank, de perfecte frisse begeleider bij uw maaltijd.</p>
-          </div>
-        </div>
-        <div class="menu-card">
-          <img class="menu-card-img" src="pictures/turkish coffee.avif" alt="Turkse Koffie">
-          <div class="menu-card-body">
-            <div class="menu-card-top">
-              <div class="menu-card-name">Turkse Koffie</div>
-              <div class="menu-card-price">€3,50</div>
-            </div>
-            <p class="menu-card-desc">Authentieke mokka bereid op zand, geserveerd met Turkse lokum.</p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /menu-section -->
-  </div>
-
-  <footer>
-    <div class="footer-bottom" style="max-width:1300px;margin:auto;padding:2rem 0;opacity:0.5;display:flex;justify-content:space-between">
-      <span>© 2025 Baba Döner</span>
-      <span>✦ Anatolisch Vakmanschap ✦</span>
-    </div>
-  </footer>
-</div>
-
-
-<!-- ══════════════════════════════
-     GALLERY PAGE
-══════════════════════════════ -->
-<div id="page-gallery">
-  <div style="margin-top:70px">
-    <div class="menu-hero">
+    <section class="hero">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80&fit=crop"
+        alt="Restaurant interieur">
       <div class="hero-pattern"></div>
-      <div class="menu-hero-content">
-        <div class="hero-subtitle">✦ Beelden & Sfeer ✦</div>
-        <h1 style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2rem,5vw,4rem);color:var(--wit)">Galerij</h1>
+      <div class="hero-content">
+        <div class="hero-subtitle">✦ Authentiek Anatolisch ✦</div>
+        <h1 class="hero-title">Baba <span class="accent">Döner</span></h1>
+        <p class="hero-tagline">Waar elke hap een reis naar Anatolië is</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="#page-menu">Bekijk Menu</a>
+          <a class="btn-outline" href="#page-reservation">Reserveer Nu</a>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="section section-sand">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">✦ Onze specialiteiten ✦</div>
+          <h2 class="section-title">Signature Gerechten</h2>
+        </div>
+        <div class="featured-grid">
+          <div class="featured-main">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&fit=crop&crop=center"
+              alt="Döner Kebab Deluxe">
+            <div class="featured-overlay">
+              <h3>Döner Kebab Deluxe</h3>
+              <p>Het kroonstuk van Baba Döner — gegaard aan het spit gedurende 8 uur</p>
+            </div>
+          </div>
+          <div class="featured-side">
+            <img src="pictures/adanakebap.jpg" alt="Adana Kebab"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🍢</div>
+            <div class="featured-side-overlay">
+              <h4>Adana Kebab</h4>
+            </div>
+          </div>
+          <div class="featured-side">
+            <img src="pictures/meze.png" alt="Meze"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥗</div>
+            <div class="featured-side-overlay">
+              <h4>Meze</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section">
       <div class="container">
-        <div class="section-header">
-          <div class="section-label">✦ Restaurant & Gerechten ✦</div>
-          <h2 class="section-title">Een Visuele Reis</h2>
-        </div>
-        <div class="gallery-grid">
-          <div class="gallery-item wide tall">
-            <div class="gallery-placeholder">🥙<span>DÖNER KEBAB</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ DÖNER KEBAB ✦</div></div>
+        <div class="about-grid">
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80&fit=crop&crop=center"
+              alt="Restaurant interieur Baba Döner">
           </div>
-          <div class="gallery-item">
-            <div class="gallery-placeholder">🍢<span>ADANA</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ ADANA ✦</div></div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-placeholder">🥗<span>MEZE</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ MEZE ✦</div></div>
-          </div>
-          <div class="gallery-item wide">
-            <div class="gallery-placeholder">🏛️<span>INTERIEUR</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ INTERIEUR ✦</div></div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-placeholder">🍞<span>PIDE</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ PIDE ✦</div></div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-placeholder">☕<span>TURKISH TEA</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ TURKISH TEA ✦</div></div>
-          </div>
-          <div class="gallery-item tall">
-            <div class="gallery-placeholder">👨‍🍳<span>ONZE CHEF</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ ONZE CHEF ✦</div></div>
-          </div>
-          <div class="gallery-item">
-            <div class="gallery-placeholder">🫙<span>KRUIDEN</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ KRUIDEN ✦</div></div>
-          </div>
-          <div class="gallery-item wide">
-            <div class="gallery-placeholder">🌙<span>AVONDSFEER</span></div>
-            <div class="gallery-overlay"><div class="gallery-overlay-text">✦ AVONDSFEER ✦</div></div>
+          <div class="about-text">
+            <div class="section-label">✦ Ons verhaal ✦</div>
+            <h2 class="section-title">Meer dan 20 jaar<br>smaak & traditie</h2>
+            <div class="divider">❧</div>
+            <p>Baba Döner begon als een droom van één familie — de authentieke smaken van Centraal-Anatolië naar
+              Nederland brengen. Met recepten die van generatie op generatie zijn doorgegeven, bereiden wij elk gerecht
+              met liefde en respect voor de traditie.</p>
+            <p>Van de malse döner die uren aan het spit draait, tot onze huisgemaakte mezes en versgebakken pide — alles
+              wordt met verse, lokale ingrediënten bereid.</p>
+            <div class="about-stats">
+              <div class="stat">
+                <div class="stat-num">20+</div>
+                <div class="stat-label">Jaren Ervaring</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">Gerechten</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num">∞</div>
+                <div class="stat-label">Passie</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1047,200 +119,674 @@
     <div class="video-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-label" style="color:var(--goud)">✦ Video's ✦</div>
-          <h2 class="section-title" style="color:var(--zand)">Beleef de Sfeer</h2>
+          <div class="section-label" style="color:var(--goud)">✦ Behind the scenes ✦</div>
+          <h2 class="section-title" style="color:var(--zand)">Beleef Baba Döner</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem">
-          <div class="video-wrap">
-            <div class="video-placeholder" style="aspect-ratio:16/9">
+        <div class="video-grid">
+          <div class="video-wrap" style="grid-column:1/-1">
+            <div class="video-placeholder main">
               <div class="video-play-btn">▶</div>
-              <div>Sfeer avond</div>
+              <div>Restaurant sfeer / chef aan het werk</div>
             </div>
-            <div class="video-title">✦ AVONDSFEER ✦</div>
+            <div class="video-title">✦ DE KUNST VAN DÖNER BEREIDEN ✦</div>
           </div>
           <div class="video-wrap">
-            <div class="video-placeholder" style="aspect-ratio:16/9">
+            <div class="video-placeholder">
               <div class="video-play-btn">▶</div>
-              <div>Bereidingsproces</div>
+              <div>Keukentour</div>
             </div>
-            <div class="video-title">✦ BEREIDING ✦</div>
+            <div class="video-title">✦ ONZE KEUKEN ✦</div>
           </div>
           <div class="video-wrap">
-            <div class="video-placeholder" style="aspect-ratio:16/9">
+            <div class="video-placeholder">
               <div class="video-play-btn">▶</div>
-              <div>Team & cultuur</div>
+              <div>Klantervaringen</div>
             </div>
-            <div class="video-title">✦ ONS TEAM ✦</div>
+            <div class="video-title">✦ KLANTERVARINGEN ✦</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-
-<!-- ══════════════════════════════
-     CONTACT PAGE
-══════════════════════════════ -->
-<div id="page-contact">
-  <div style="margin-top:70px">
-    <div class="menu-hero">
-      <div class="hero-pattern"></div>
-      <div class="menu-hero-content">
-        <div class="hero-subtitle">✦ Neem contact op ✦</div>
-        <h1 style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2rem,5vw,4rem);color:var(--wit)">Contact</h1>
-      </div>
-    </div>
-
-    <section class="section">
+    <section class="section section-sand">
       <div class="container">
-        <div class="contact-grid">
-          <div class="contact-info">
-            <div class="section-label">✦ Bereik ons ✦</div>
-            <h2 class="section-title" style="margin-bottom:2rem">Wij horen<br>graag van u</h2>
-            <div class="contact-info-item">
-              <div class="contact-icon">📍</div>
-              <div class="contact-info-text">
-                <h4>Adres</h4>
-                <p>Anatoliastraat 42<br>1234 AB Amsterdam<br>Nederland</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+          <div>
+            <div class="section-label">✦ Openingstijden ✦</div>
+            <h2 class="section-title" style="margin-bottom:2rem">Wanneer kunt u<br>ons bezoeken</h2>
+            <div class="hours-grid">
+              <div>
+                <div class="hour-row"><span class="hour-day">Maandag</span><span class="hour-time">11:00 – 22:00</span>
+                </div>
+                <div class="hour-row"><span class="hour-day">Dinsdag</span><span class="hour-time">11:00 – 22:00</span>
+                </div>
+                <div class="hour-row"><span class="hour-day">Woensdag</span><span class="hour-time">11:00 – 22:00</span>
+                </div>
+                <div class="hour-row"><span class="hour-day">Donderdag</span><span class="hour-time">11:00 –
+                    23:00</span></div>
+              </div>
+              <div>
+                <div class="hour-row"><span class="hour-day">Vrijdag</span><span class="hour-time">11:00 – 00:00</span>
+                </div>
+                <div class="hour-row"><span class="hour-day">Zaterdag</span><span class="hour-time">12:00 – 00:00</span>
+                </div>
+                <div class="hour-row"><span class="hour-day">Zondag</span><span class="hour-time">12:00 – 22:00</span>
+                </div>
               </div>
             </div>
-            <div class="contact-info-item">
-              <div class="contact-icon">📞</div>
-              <div class="contact-info-text">
-                <h4>Telefoon</h4>
-                <p>+31 20 123 4567<br>Ma–Za: 10:00–23:00</p>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-icon">✉️</div>
-              <div class="contact-info-text">
-                <h4>E-mail</h4>
-                <p>info@babadoner.nl<br>reserveringen@babadoner.nl</p>
-              </div>
-            </div>
-            <div class="map-placeholder">
-              <span style="font-size:2rem">🗺️</span>
-              <span>KAART — Google Maps Embed</span>
-            </div>
+            <div style="margin-top:2rem"><a class="btn-primary" href="#page-reservation">Reserveer Een Tafel</a></div>
           </div>
           <div>
-            <div class="contact-form-wrap">
-              <h2 class="form-title">Stuur een bericht</h2>
-              <p class="form-subtitle">Wij reageren binnen 24 uur op uw bericht</p>
-              <form action="mailto:info@babadoner.nl" method="post" enctype="text/plain">
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Voornaam</label>
-                    <input type="text" name="voornaam" placeholder="Ahmed">
-                  </div>
-                  <div class="form-group">
-                    <label>Achternaam</label>
-                    <input type="text" name="achternaam" placeholder="Yilmaz">
-                  </div>
+            <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80&fit=crop&crop=center"
+              alt="Restaurant" style="width:100%;height:350px;object-fit:cover;display:block">
+            <div style="margin-top:1.5rem">
+              <div class="contact-info-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-info-text">
+                  <h4>Adres</h4>
+                  <p>Anatoliastraat 42<br>1234 AB Amsterdam</p>
                 </div>
-                <div class="form-group">
-                  <label>E-mailadres</label>
-                  <input type="email" name="email" placeholder="uw@email.nl">
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-info-text">
+                  <h4>Telefoon</h4>
+                  <p>+31 20 123 4567</p>
                 </div>
-                <div class="form-group">
-                  <label>Onderwerp</label>
-                  <select name="onderwerp">
-                    <option>Algemene vraag</option>
-                    <option>Reservering</option>
-                    <option>Catering aanvraag</option>
-                    <option>Klacht/Feedback</option>
-                    <option>Samenwerking</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Uw bericht</label>
-                  <textarea name="bericht" rows="5" placeholder="Schrijf hier uw bericht..."></textarea>
-                </div>
-                <button type="submit" class="btn-primary" style="width:100%">Verstuur Bericht ✦</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Baba <span>Döner</span></div>
+          <p>Authentieke Anatolische smaken in het hart van Nederland. Tradities bewaard, voor elke generatie opnieuw
+            beleefd.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <a href="#page-home">Home</a>
+          <a href="#page-menu">Menu</a>
+          <a href="#page-gallery">Galerij</a>
+          <a href="#page-contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>Anatoliastraat 42</p>
+          <p>Amsterdam</p>
+          <p>+31 20 123 4567</p>
+          <p>info@babadoner.nl</p>
+        </div>
+        <div class="footer-col">
+          <h4>Openingstijden</h4>
+          <p>Ma–Do: 11:00–22:00</p>
+          <p>Vr: 11:00–00:00</p>
+          <p>Za: 12:00–00:00</p>
+          <p>Zo: 12:00–22:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Baba Döner. Alle rechten voorbehouden.</span>
+        <span>✦ Met liefde gemaakt vanuit Anatolië ✦</span>
+      </div>
+    </footer>
   </div>
-</div>
 
 
-<!-- ══════════════════════════════
-     RESERVATION PAGE
-══════════════════════════════ -->
-<div id="page-reservation">
-  <div class="reservation-section" style="margin-top:70px">
-    <div class="reservation-image">
-      <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=80&fit=crop&crop=center"
-        alt="Restaurant tafelsetting">
+  <!-- ══════════════════════════════ MENU ══════════════════════════════ -->
+  <div id="page-menu">
+    <div style="margin-top:70px">
+      <div class="menu-hero">
+        <div class="hero-pattern" style="opacity:0.07"></div>
+        <div class="menu-hero-content">
+          <div class="hero-subtitle">✦ Authentiek & Vers ✦</div>
+          <h1 style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2rem,5vw,4rem);color:var(--wit)">Onze
+            Menukaart</h1>
+        </div>
+      </div>
+
+      <div class="menu-section">
+
+        <div class="menu-section-title">🥙 Döner</div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1561651823-34feb02250e4?w=600&q=80&fit=crop"
+              alt="Döner Kebab Deluxe">
+            <div class="menu-card-body">
+              <div class="badge">Bestseller</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Döner Kebab Deluxe</div>
+                <div class="menu-card-price">€13,50</div>
+              </div>
+              <p class="menu-card-desc">Malse döner gegaard aan het spit, geserveerd met verse salade, tomaat en
+                huisgemaakte saus.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/donerschotel.png" alt="Döner Schotel"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥙</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Döner Schotel</div>
+                <div class="menu-card-price">€15,00</div>
+              </div>
+              <p class="menu-card-desc">Rijkelijk belegde döner schotel met rijst, gegrilde groenten en tzatziki.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/durum-et-doner_b.png" alt="Döner Wrap"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🌯</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Döner Wrap</div>
+                <div class="menu-card-price">€10,50</div>
+              </div>
+              <p class="menu-card-desc">Verse wrap gevuld met döner, sla, ui, tomaat en speciale saus.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section-title">🍢 Kebab</div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/adanakebap.jpg" alt="Adana Kebab"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🍢</div>
+            <div class="menu-card-body">
+              <div class="badge nieuw">Specialiteit</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Adana Kebab</div>
+                <div class="menu-card-price">€16,50</div>
+              </div>
+              <p class="menu-card-desc">Pittig gehakt lam op houtskool, geserveerd met flatbread en gegrilde paprika.
+              </p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/urfakebap.webp" alt="Urfa Kebab"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🍖</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Urfa Kebab</div>
+                <div class="menu-card-price">€16,50</div>
+              </div>
+              <p class="menu-card-desc">Zachte urfa kebab met subtiele kruiden, geserveerd met rijst en salade.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/tavuksis.jpg" alt="Tavuk Şiş"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🐔</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Tavuk Şiş</div>
+                <div class="menu-card-price">€14,50</div>
+              </div>
+              <p class="menu-card-desc">Gemarineerde kip spiesjes van de houtskoolbarbecue, met yoghurtsaus.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section-title">🥗 Meze</div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/meze.png" alt="Meze Schotel"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥗</div>
+            <div class="menu-card-body">
+              <div class="badge veg">Vegetarisch</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Gemengde Meze</div>
+                <div class="menu-card-price">€12,00</div>
+              </div>
+              <p class="menu-card-desc">Selectie van hummus, baba ghanoush, cacık en gegrilde aubergine.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/hummus.jpg" alt="Hummus"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🫘</div>
+            <div class="menu-card-body">
+              <div class="badge veg">Vegetarisch</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Hummus</div>
+                <div class="menu-card-price">€7,50</div>
+              </div>
+              <p class="menu-card-desc">Huisgemaakte hummus met olijfolie, paprikapoeder en versgebakken pide.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/Cacik.png" alt="Cacık"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥛</div>
+            <div class="menu-card-body">
+              <div class="badge veg">Vegetarisch</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Cacık</div>
+                <div class="menu-card-price">€6,00</div>
+              </div>
+              <p class="menu-card-desc">Verse Turkse yoghurt met komkommer, knoflook en munt.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section-title">🍞 Pide</div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/kasarli-pide.jpg" alt="Kaşarlı Pide"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🍞</div>
+            <div class="menu-card-body">
+              <div class="badge">Favoriet</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Kaşarlı Pide</div>
+                <div class="menu-card-price">€11,00</div>
+              </div>
+              <p class="menu-card-desc">Turkse bootpizza met gesmolten kaşar kaas, vers uit de steenoven.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/kiymali-pide.jpg.webp" alt="Kıymalı Pide"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥩</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Kıymalı Pide</div>
+                <div class="menu-card-price">€13,00</div>
+              </div>
+              <p class="menu-card-desc">Pide met gekruid gehakt, ui, tomaat en verse peterselie.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/kasarli-yumurtali-pide-518c-c.jpg" alt="Yumurtalı Pide"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥚</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Yumurtalı Pide</div>
+                <div class="menu-card-price">€12,00</div>
+              </div>
+              <p class="menu-card-desc">Pide met ei, sucuk worstjes en kaas — een klassiek Anatolisch ontbijt.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section-title">🍯 Dessert</div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/Baklava(1).png" alt="Baklava"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🍯</div>
+            <div class="menu-card-body">
+              <div class="badge">Huisgemaakt</div>
+              <div class="menu-card-top">
+                <div class="menu-card-name">Baklava</div>
+                <div class="menu-card-price">€6,50</div>
+              </div>
+              <p class="menu-card-desc">Knapperig deeg gevuld met pistache en honing, recept van grootmoeder.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/sutlac.webp" alt="Sütlaç"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🍮</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Sütlaç</div>
+                <div class="menu-card-price">€5,50</div>
+              </div>
+              <p class="menu-card-desc">Traditionele Turkse rijstepudding, koud geserveerd met kaneelpoeder.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/kunefe.jpg" alt="Künefe"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🧁</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Künefe</div>
+                <div class="menu-card-price">€8,00</div>
+              </div>
+              <p class="menu-card-desc">Warme kadayıf met smeltende kaas en suikersiroop, bestrooid met pistache.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-section-title">☕ Dranken</div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/turkse thee.jpg" alt="Turkse Thee"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">☕</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Turkse Thee</div>
+                <div class="menu-card-price">€2,50</div>
+              </div>
+              <p class="menu-card-desc">Traditionele çay geserveerd in klassiek tulpglas, sterk en aromatisch.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/ayran.webp" alt="Ayran"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">🥛</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Ayran</div>
+                <div class="menu-card-price">€3,00</div>
+              </div>
+              <p class="menu-card-desc">Gezouten yoghurtdrank, de perfecte frisse begeleider bij uw maaltijd.</p>
+            </div>
+          </div>
+          <div class="menu-card">
+            <img class="menu-card-img" src="pictures/turkish coffee.avif" alt="Turkse Koffie"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="menu-card-img-placeholder" style="display:none">☕</div>
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <div class="menu-card-name">Turkse Koffie</div>
+                <div class="menu-card-price">€3,50</div>
+              </div>
+              <p class="menu-card-desc">Authentieke mokka bereid op zand, geserveerd met Turkse lokum.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="reservation-form-wrap">
-      <div class="section-label" style="text-align:left">✦ Tafel reserveren ✦</div>
-      <h2 class="form-title">Reserveer uw Tafel</h2>
-      <p class="form-subtitle">Geniet van een onvergetelijk diner bij Baba Döner</p>
-      <form action="mailto:reserveringen@babadoner.nl" method="post" enctype="text/plain">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Naam</label>
-            <input type="text" name="naam" placeholder="Uw naam">
+
+    <footer>
+      <div class="footer-bottom"
+        style="max-width:1300px;margin:auto;padding:2rem 0;opacity:0.5;display:flex;justify-content:space-between">
+        <span>© 2025 Baba Döner</span>
+        <span>✦ Anatolisch Vakmanschap ✦</span>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- ══════════════════════════════ GALERIJ ══════════════════════════════ -->
+  <div id="page-gallery">
+    <div style="margin-top:70px">
+      <div class="menu-hero">
+        <div class="hero-pattern"></div>
+        <div class="menu-hero-content">
+          <div class="hero-subtitle">✦ Beelden & Sfeer ✦</div>
+          <h1 style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2rem,5vw,4rem);color:var(--wit)">Galerij
+          </h1>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-label">✦ Restaurant & Gerechten ✦</div>
+            <h2 class="section-title">Een Visuele Reis</h2>
           </div>
-          <div class="form-group">
-            <label>Telefoon</label>
-            <input type="tel" name="telefoon" placeholder="+31 6...">
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🥙<span>Döner Kebab</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ DÖNER KEBAB ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🍢<span>Adana Kebab</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ ADANA KEBAB ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🥗<span>Meze</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ MEZE ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🏛️<span>Interieur</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ INTERIEUR ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🍞<span>Pide</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ PIDE ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">☕<span>Turkse Thee</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ TURKSE THEE ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">👨‍🍳<span>Onze Chef</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ ONZE CHEF ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🫙<span>Kruiden</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ KRUIDEN ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🌙<span>Avondsfeer</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ AVONDSFEER ✦</div>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="gallery-placeholder">🍯<span>Baklava</span></div>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-text">✦ BAKLAVA ✦</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label>E-mailadres</label>
-          <input type="email" name="email" placeholder="uw@email.nl">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Datum</label>
-            <input type="date" name="datum">
+      </section>
+
+      <div class="video-section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-label" style="color:var(--goud)">✦ Video's ✦</div>
+            <h2 class="section-title" style="color:var(--zand)">Beleef de Sfeer</h2>
           </div>
-          <div class="form-group">
-            <label>Tijd</label>
-            <select name="tijd">
-              <option>12:00</option><option>12:30</option><option>13:00</option>
-              <option>13:30</option><option>17:00</option><option>17:30</option>
-              <option>18:00</option><option>18:30</option><option>19:00</option>
-              <option>19:30</option><option>20:00</option><option>20:30</option>
-              <option>21:00</option><option>21:30</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Aantal personen</label>
-            <select name="personen">
-              <option>1 persoon</option><option>2 personen</option>
-              <option>3 personen</option><option>4 personen</option>
-              <option>5 personen</option><option>6 personen</option>
-              <option>7 personen</option><option>8 personen</option>
-              <option>Meer dan 8</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Gelegenheid</label>
-            <select name="gelegenheid">
-              <option>Gewoon diner</option><option>Verjaardag</option>
-              <option>Jubileum</option><option>Zakelijk diner</option>
-              <option>Romantisch diner</option><option>Familiebijeenkomst</option>
-            </select>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem">
+            <div class="video-wrap">
+              <div class="video-placeholder" style="aspect-ratio:16/9">
+                <div class="video-play-btn">▶</div>
+                <div>Sfeer avond</div>
+              </div>
+              <div class="video-title">✦ AVONDSFEER ✦</div>
+            </div>
+            <div class="video-wrap">
+              <div class="video-placeholder" style="aspect-ratio:16/9">
+                <div class="video-play-btn">▶</div>
+                <div>Bereidingsproces</div>
+              </div>
+              <div class="video-title">✦ BEREIDING ✦</div>
+            </div>
+            <div class="video-wrap">
+              <div class="video-placeholder" style="aspect-ratio:16/9">
+                <div class="video-play-btn">▶</div>
+                <div>Team & cultuur</div>
+              </div>
+              <div class="video-title">✦ ONS TEAM ✦</div>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label>Speciale wensen</label>
-          <textarea name="wensen" rows="3" placeholder="Allergieën, speciale verzoeken, dieetwensen..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem">Bevestig Reservering ✦</button>
-      </form>
+      </div>
     </div>
   </div>
-</div>
+
+
+  <!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
+  <div id="page-contact">
+    <div style="margin-top:70px">
+      <div class="menu-hero">
+        <div class="hero-pattern"></div>
+        <div class="menu-hero-content">
+          <div class="hero-subtitle">✦ Neem contact op ✦</div>
+          <h1 style="font-family:'Cinzel Decorative',cursive;font-size:clamp(2rem,5vw,4rem);color:var(--wit)">Contact
+          </h1>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <div class="section-label">✦ Bereik ons ✦</div>
+              <h2 class="section-title" style="margin-bottom:2rem">Wij horen<br>graag van u</h2>
+              <div class="contact-info-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-info-text">
+                  <h4>Adres</h4>
+                  <p>Anatoliastraat 42<br>1234 AB Amsterdam<br>Nederland</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-info-text">
+                  <h4>Telefoon</h4>
+                  <p>+31 20 123 4567<br>Ma–Za: 10:00–23:00</p>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-icon">✉️</div>
+                <div class="contact-info-text">
+                  <h4>E-mail</h4>
+                  <p>info@babadoner.nl<br>reserveringen@babadoner.nl</p>
+                </div>
+              </div>
+              <div class="map-placeholder">
+                <span style="font-size:2rem">🗺️</span>
+                <span>KAART — Google Maps Embed</span>
+              </div>
+            </div>
+            <div>
+              <div class="contact-form-wrap">
+                <h2 class="form-title">Stuur een bericht</h2>
+                <p class="form-subtitle">Wij reageren binnen 24 uur op uw bericht</p>
+                <form action="mailto:info@babadoner.nl" method="post" enctype="text/plain">
+                  <div class="form-row">
+                    <div class="form-group"><label>Voornaam</label><input type="text" name="voornaam"
+                        placeholder="Ahmed"></div>
+                    <div class="form-group"><label>Achternaam</label><input type="text" name="achternaam"
+                        placeholder="Yilmaz"></div>
+                  </div>
+                  <div class="form-group"><label>E-mailadres</label><input type="email" name="email"
+                      placeholder="uw@email.nl"></div>
+                  <div class="form-group">
+                    <label>Onderwerp</label>
+                    <select name="onderwerp">
+                      <option>Algemene vraag</option>
+                      <option>Reservering</option>
+                      <option>Catering aanvraag</option>
+                      <option>Klacht/Feedback</option>
+                      <option>Samenwerking</option>
+                    </select>
+                  </div>
+                  <div class="form-group"><label>Uw bericht</label><textarea name="bericht" rows="5"
+                      placeholder="Schrijf hier uw bericht..."></textarea></div>
+                  <button type="submit" class="btn-primary" style="width:100%">Verstuur Bericht ✦</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════ RESERVEREN ══════════════════════════════ -->
+  <div id="page-reservation">
+    <div class="reservation-section" style="margin-top:70px">
+      <div class="reservation-image">
+        <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=80&fit=crop&crop=center"
+          alt="Restaurant tafelsetting">
+      </div>
+      <div class="reservation-form-wrap">
+        <div class="section-label" style="text-align:left">✦ Tafel reserveren ✦</div>
+        <h2 class="form-title">Reserveer uw Tafel</h2>
+        <p class="form-subtitle">Geniet van een onvergetelijk diner bij Baba Döner</p>
+        <form action="mailto:reserveringen@babadoner.nl" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div class="form-group"><label>Naam</label><input type="text" name="naam" placeholder="Uw naam"></div>
+            <div class="form-group"><label>Telefoon</label><input type="tel" name="telefoon" placeholder="+31 6...">
+            </div>
+          </div>
+          <div class="form-group"><label>E-mailadres</label><input type="email" name="email" placeholder="uw@email.nl">
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Datum</label><input type="date" name="datum"></div>
+            <div class="form-group">
+              <label>Tijd</label>
+              <select name="tijd">
+                <option>12:00</option>
+                <option>12:30</option>
+                <option>13:00</option>
+                <option>13:30</option>
+                <option>17:00</option>
+                <option>17:30</option>
+                <option>18:00</option>
+                <option>18:30</option>
+                <option>19:00</option>
+                <option>19:30</option>
+                <option>20:00</option>
+                <option>20:30</option>
+                <option>21:00</option>
+                <option>21:30</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Aantal personen</label>
+              <select name="personen">
+                <option>1 persoon</option>
+                <option>2 personen</option>
+                <option>3 personen</option>
+                <option>4 personen</option>
+                <option>5 personen</option>
+                <option>6 personen</option>
+                <option>7 personen</option>
+                <option>8 personen</option>
+                <option>Meer dan 8</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Gelegenheid</label>
+              <select name="gelegenheid">
+                <option>Gewoon diner</option>
+                <option>Verjaardag</option>
+                <option>Jubileum</option>
+                <option>Zakelijk diner</option>
+                <option>Romantisch diner</option>
+                <option>Familiebijeenkomst</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>Speciale wensen</label><textarea name="wensen" rows="3"
+              placeholder="Allergieën, speciale verzoeken, dieetwensen..."></textarea></div>
+          <button type="submit" class="btn-primary" style="width:100%;margin-top:0.5rem">Bevestig Reservering ✦</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </body>
+
 </html>
