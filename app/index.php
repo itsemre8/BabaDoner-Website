@@ -1,3 +1,11 @@
+<?php
+require 'db.php';
+$zoek = isset($_GET['zoek']) ? '%' . $_GET['zoek'] . '%' : '%';
+$stmt = $pdo->prepare("SELECT * FROM gerechten WHERE naam LIKE ?");
+$stmt->execute([$zoek]);
+$gerechten = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -230,7 +238,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2025 Baba Döner. Alle rechten voorbehouden.</span>
+        <span>© 2005 Baba Döner. Alle rechten voorbehouden.</span>
         <span>✦ Met liefde gemaakt vanuit Anatolië ✦</span>
       </div>
     </footer>
@@ -248,268 +256,68 @@
             Menukaart</h1>
         </div>
       </div>
-
-      <div class="menu-section">
-
-        <div class="menu-section-title">🥙 Döner</div>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <img class="menu-card-img"
-              src="https://images.unsplash.com/photo-1561651823-34feb02250e4?w=600&q=80&fit=crop"
-              alt="Döner Kebab Deluxe">
-            <div class="menu-card-body">
-              <div class="badge">Bestseller</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Döner Kebab Deluxe</div>
-                <div class="menu-card-price">€13,50</div>
-              </div>
-              <p class="menu-card-desc">Malse döner gegaard aan het spit, geserveerd met verse salade, tomaat en
-                huisgemaakte saus.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/donerschotel.png" alt="Döner Schotel"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🥙</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Döner Schotel</div>
-                <div class="menu-card-price">€15,00</div>
-              </div>
-              <p class="menu-card-desc">Rijkelijk belegde döner schotel met rijst, gegrilde groenten en tzatziki.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/durum-et-doner_b.png" alt="Döner Wrap"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🌯</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Döner Wrap</div>
-                <div class="menu-card-price">€10,50</div>
-              </div>
-              <p class="menu-card-desc">Verse wrap gevuld met döner, sla, ui, tomaat en speciale saus.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-section-title">🍢 Kebab</div>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/adanakebap.jpg" alt="Adana Kebab"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🍢</div>
-            <div class="menu-card-body">
-              <div class="badge nieuw">Specialiteit</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Adana Kebab</div>
-                <div class="menu-card-price">€16,50</div>
-              </div>
-              <p class="menu-card-desc">Pittig gehakt lam op houtskool, geserveerd met flatbread en gegrilde paprika.
-              </p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/urfakebap.webp" alt="Urfa Kebab"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🍖</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Urfa Kebab</div>
-                <div class="menu-card-price">€16,50</div>
-              </div>
-              <p class="menu-card-desc">Zachte urfa kebab met subtiele kruiden, geserveerd met rijst en salade.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/tavuksis.jpg" alt="Tavuk Şiş"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🐔</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Tavuk Şiş</div>
-                <div class="menu-card-price">€14,50</div>
-              </div>
-              <p class="menu-card-desc">Gemarineerde kip spiesjes van de houtskoolbarbecue, met yoghurtsaus.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-section-title">🥗 Meze</div>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/meze.png" alt="Meze Schotel"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🥗</div>
-            <div class="menu-card-body">
-              <div class="badge veg">Vegetarisch</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Gemengde Meze</div>
-                <div class="menu-card-price">€12,00</div>
-              </div>
-              <p class="menu-card-desc">Selectie van hummus, baba ghanoush, cacık en gegrilde aubergine.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/hummus.jpg" alt="Hummus"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🫘</div>
-            <div class="menu-card-body">
-              <div class="badge veg">Vegetarisch</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Hummus</div>
-                <div class="menu-card-price">€7,50</div>
-              </div>
-              <p class="menu-card-desc">Huisgemaakte hummus met olijfolie, paprikapoeder en versgebakken pide.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/Cacik.png" alt="Cacık"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🥛</div>
-            <div class="menu-card-body">
-              <div class="badge veg">Vegetarisch</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Cacık</div>
-                <div class="menu-card-price">€6,00</div>
-              </div>
-              <p class="menu-card-desc">Verse Turkse yoghurt met komkommer, knoflook en munt.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-section-title">🍞 Pide</div>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/kasarli-pide.jpg" alt="Kaşarlı Pide"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🍞</div>
-            <div class="menu-card-body">
-              <div class="badge">Favoriet</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Kaşarlı Pide</div>
-                <div class="menu-card-price">€11,00</div>
-              </div>
-              <p class="menu-card-desc">Turkse bootpizza met gesmolten kaşar kaas, vers uit de steenoven.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/kiymali-pide.jpg.webp" alt="Kıymalı Pide"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🥩</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Kıymalı Pide</div>
-                <div class="menu-card-price">€13,00</div>
-              </div>
-              <p class="menu-card-desc">Pide met gekruid gehakt, ui, tomaat en verse peterselie.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/kasarli-yumurtali-pide-518c-c.jpg" alt="Yumurtalı Pide"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🥚</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Yumurtalı Pide</div>
-                <div class="menu-card-price">€12,00</div>
-              </div>
-              <p class="menu-card-desc">Pide met ei, sucuk worstjes en kaas — een klassiek Anatolisch ontbijt.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-section-title">🍯 Dessert</div>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/Baklava(1).png" alt="Baklava"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🍯</div>
-            <div class="menu-card-body">
-              <div class="badge">Huisgemaakt</div>
-              <div class="menu-card-top">
-                <div class="menu-card-name">Baklava</div>
-                <div class="menu-card-price">€6,50</div>
-              </div>
-              <p class="menu-card-desc">Knapperig deeg gevuld met pistache en honing, recept van grootmoeder.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/sutlac.webp" alt="Sütlaç"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🍮</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Sütlaç</div>
-                <div class="menu-card-price">€5,50</div>
-              </div>
-              <p class="menu-card-desc">Traditionele Turkse rijstepudding, koud geserveerd met kaneelpoeder.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/kunefe.jpg" alt="Künefe"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🧁</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Künefe</div>
-                <div class="menu-card-price">€8,00</div>
-              </div>
-              <p class="menu-card-desc">Warme kadayıf met smeltende kaas en suikersiroop, bestrooid met pistache.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-section-title">☕ Dranken</div>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/turkse thee.jpg" alt="Turkse Thee"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">☕</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Turkse Thee</div>
-                <div class="menu-card-price">€2,50</div>
-              </div>
-              <p class="menu-card-desc">Traditionele çay geserveerd in klassiek tulpglas, sterk en aromatisch.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/ayran.webp" alt="Ayran"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">🥛</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Ayran</div>
-                <div class="menu-card-price">€3,00</div>
-              </div>
-              <p class="menu-card-desc">Gezouten yoghurtdrank, de perfecte frisse begeleider bij uw maaltijd.</p>
-            </div>
-          </div>
-          <div class="menu-card">
-            <img class="menu-card-img" src="pictures/turkish coffee.avif" alt="Turkse Koffie"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="menu-card-img-placeholder" style="display:none">☕</div>
-            <div class="menu-card-body">
-              <div class="menu-card-top">
-                <div class="menu-card-name">Turkse Koffie</div>
-                <div class="menu-card-price">€3,50</div>
-              </div>
-              <p class="menu-card-desc">Authentieke mokka bereid op zand, geserveerd met Turkse lokum.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
 
-    <footer>
-      <div class="footer-bottom"
-        style="max-width:1300px;margin:auto;padding:2rem 0;opacity:0.5;display:flex;justify-content:space-between">
-        <span>© 2025 Baba Döner</span>
-        <span>✦ Anatolisch Vakmanschap ✦</span>
+    <div style="text-align:center; padding: 2rem;">
+      <form method="GET" action="">
+        <input type="text" name="zoek" placeholder="Zoek een gerecht..."
+          value="<?php echo isset($_GET['zoek']) ? $_GET['zoek'] : ''; ?>"
+          style="padding:0.8rem; width:300px; font-size:1rem;">
+        <button type="submit" class="btn-primary">Zoeken</button>
+      </form>
+    </div>
+
+    <?php
+  $categorien = [
+    'Döner' => '🥙',
+    'Kebab' => '🍢',
+    'Meze' => '🥗',
+    'Pide' => '🍞',
+    'Dessert' => '🍯',
+    'Dranken' => '☕'
+  ];
+
+  foreach ($categorien as $cat => $emoji):
+   $zoek = isset($_GET['zoek']) ? '%' . $_GET['zoek'] . '%' : '%';
+$stmt = $pdo->prepare("SELECT * FROM gerechten WHERE categorie = ? AND naam LIKE ?");
+$stmt->execute([$cat, $zoek]);
+    $items = $stmt->fetchAll();
+    if (count($items) > 0):
+  ?>
+    <div class="menu-section-title">
+      <?php echo $emoji . ' ' . $cat; ?>
+    </div>
+    <div class="menu-grid">
+      <?php foreach ($items as $gerecht): ?>
+      <div class="menu-card">
+        <div class="menu-card-img-placeholder">🍽️</div>
+        <div class="menu-card-body">
+          <div class="menu-card-top">
+            <div class="menu-card-name">
+              <?php echo $gerecht['naam']; ?>
+            </div>
+            <div class="menu-card-price">€
+              <?php echo number_format($gerecht['prijs'], 2, ',', '.'); ?>
+            </div>
+          </div>
+          <p class="menu-card-desc">
+            <?php echo $gerecht['beschrijving']; ?>
+          </p>
+        </div>
       </div>
-    </footer>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; endforeach; ?>
+  </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom"
+      style="max-width:1300px;margin:auto;padding:2rem 0;opacity:0.5;display:flex;justify-content:space-between">
+      <span>© 2025 Baba Döner</span>
+      <span>✦ Anatolisch Vakmanschap ✦</span>
+    </div>
+  </footer>
   </div>
 
 
