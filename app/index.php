@@ -31,6 +31,7 @@ $gerechten = $stmt->fetchAll();
         <li><a href="#page-gallery">Galerij</a></li>
         <li><a href="#page-contact">Contact</a></li>
         <li><a href="#page-reservation">Reserveren</a></li>
+        <li><a href="login.php">Beheer</a></li>
       </ul>
     </div>
   </nav>
@@ -130,27 +131,16 @@ $gerechten = $stmt->fetchAll();
           <div class="section-label" style="color:var(--goud)">✦ Behind the scenes ✦</div>
           <h2 class="section-title" style="color:var(--zand)">Beleef Baba Döner</h2>
         </div>
-        <div class="video-grid">
-          <div class="video-wrap" style="grid-column:1/-1">
-            <div class="video-placeholder main">
-              <div class="video-play-btn">▶</div>
-              <div>Restaurant sfeer / chef aan het werk</div>
-            </div>
-            <div class="video-title">✦ DE KUNST VAN DÖNER BEREIDEN ✦</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+          <div class="video-wrap">
+            <video width="100%" height="300" controls>
+              <source src="videos/video1.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="video-wrap">
-            <div class="video-placeholder">
-              <div class="video-play-btn">▶</div>
-              <div>Keukentour</div>
-            </div>
-            <div class="video-title">✦ ONZE KEUKEN ✦</div>
-          </div>
-          <div class="video-wrap">
-            <div class="video-placeholder">
-              <div class="video-play-btn">▶</div>
-              <div>Klantervaringen</div>
-            </div>
-            <div class="video-title">✦ KLANTERVARINGEN ✦</div>
+            <video width="100%" height="300" controls>
+              <source src="videos/video2.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
@@ -261,63 +251,68 @@ $gerechten = $stmt->fetchAll();
     <div style="text-align:center; padding: 2rem;">
       <form method="GET" action="">
         <input type="text" name="zoek" placeholder="Zoek een gerecht..."
-          value="<?php echo isset($_GET['zoek']) ? $_GET['zoek'] : ''; ?>"
+          value="<?php echo isset($_GET['zoek']) ? htmlspecialchars($_GET['zoek']) : ''; ?>"
           style="padding:0.8rem; width:300px; font-size:1rem;">
         <button type="submit" class="btn-primary">Zoeken</button>
       </form>
     </div>
 
-    <?php
-  $categorien = [
-    'Döner' => '🥙',
-    'Kebab' => '🍢',
-    'Meze' => '🥗',
-    'Pide' => '🍞',
-    'Dessert' => '🍯',
-    'Dranken' => '☕'
-  ];
+    <div class="menu-section">
+      <?php
+    $categorien = [
+      'Döner' => '🥙',
+      'Kebab' => '🍢',
+      'Meze' => '🥗',
+      'Pide' => '🍞',
+      'Dessert' => '🍯',
+      'Dranken' => '☕'
+    ];
 
-  foreach ($categorien as $cat => $emoji):
-   $zoek = isset($_GET['zoek']) ? '%' . $_GET['zoek'] . '%' : '%';
-$stmt = $pdo->prepare("SELECT * FROM gerechten WHERE categorie = ? AND naam LIKE ?");
-$stmt->execute([$cat, $zoek]);
-    $items = $stmt->fetchAll();
-    if (count($items) > 0):
-  ?>
-    <div class="menu-section-title">
-      <?php echo $emoji . ' ' . $cat; ?>
-    </div>
-    <div class="menu-grid">
-      <?php foreach ($items as $gerecht): ?>
-      <div class="menu-card">
-        <div class="menu-card-img-placeholder">🍽️</div>
-        <div class="menu-card-body">
-          <div class="menu-card-top">
-            <div class="menu-card-name">
-              <?php echo $gerecht['naam']; ?>
-            </div>
-            <div class="menu-card-price">€
-              <?php echo number_format($gerecht['prijs'], 2, ',', '.'); ?>
-            </div>
-          </div>
-          <p class="menu-card-desc">
-            <?php echo $gerecht['beschrijving']; ?>
-          </p>
-        </div>
+    foreach ($categorien as $cat => $emoji):
+      $zoek = isset($_GET['zoek']) ? '%' . $_GET['zoek'] . '%' : '%';
+      $stmt = $pdo->prepare("SELECT * FROM gerechten WHERE categorie = ? AND naam LIKE ?");
+      $stmt->execute([$cat, $zoek]);
+      $items = $stmt->fetchAll();
+      if (count($items) > 0):
+    ?>
+      <div class="menu-section-title">
+        <?php echo $emoji . ' ' . $cat; ?>
       </div>
-      <?php endforeach; ?>
+      <div class="menu-grid">
+        <?php foreach ($items as $gerecht): ?>
+        <div class="menu-card">
+          <?php if ($gerecht['afbeelding']): ?>
+          <img class="menu-card-img" src="<?php echo $gerecht['afbeelding']; ?>" alt="<?php echo $gerecht['naam']; ?>">
+          <?php else: ?>
+          <div class="menu-card-img-placeholder">🍽️</div>
+          <?php endif; ?>
+          <div class="menu-card-body">
+            <div class="menu-card-top">
+              <div class="menu-card-name">
+                <?php echo htmlspecialchars($gerecht['naam']); ?>
+              </div>
+              <div class="menu-card-price">€
+                <?php echo number_format($gerecht['prijs'], 2, ',', '.'); ?>
+              </div>
+            </div>
+            <p class="menu-card-desc">
+              <?php echo htmlspecialchars($gerecht['beschrijving']); ?>
+            </p>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+      <?php endif; endforeach; ?>
     </div>
-    <?php endif; endforeach; ?>
-  </div>
-  </div>
 
-  <footer>
-    <div class="footer-bottom"
-      style="max-width:1300px;margin:auto;padding:2rem 0;opacity:0.5;display:flex;justify-content:space-between">
-      <span>© 2025 Baba Döner</span>
-      <span>✦ Anatolisch Vakmanschap ✦</span>
-    </div>
-  </footer>
+    <footer style="background:var(--donker);">
+      <div class="footer-bottom"
+        style="max-width:1300px;margin:auto;padding:2rem 0;display:flex;justify-content:space-between">
+        <span style="color:rgba(255,255,255,0.5);font-family:'Cinzel',serif;font-size:0.65rem;">© 2025 Baba Döner</span>
+        <span style="color:rgba(255,255,255,0.5);font-family:'Cinzel',serif;font-size:0.65rem;">✦ Anatolisch Vakmanschap
+          ✦</span>
+      </div>
+    </footer>
   </div>
 
 
@@ -341,61 +336,61 @@ $stmt->execute([$cat, $zoek]);
           </div>
           <div class="gallery-grid">
             <div class="gallery-item">
-              <div class="gallery-placeholder">🥙<span>Döner Kebab</span></div>
+              <img src="pictures/Doner-Kebab.jpg" alt="Döner Kebab" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
                 <div class="gallery-overlay-text">✦ DÖNER KEBAB ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🍢<span>Adana Kebab</span></div>
+              <img src="pictures/adanakebap.jpg" alt="Adana Kebab" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
                 <div class="gallery-overlay-text">✦ ADANA KEBAB ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🥗<span>Meze</span></div>
+              <img src="pictures/kunefe.jpg" alt="Künefe" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
-                <div class="gallery-overlay-text">✦ MEZE ✦</div>
+                <div class="gallery-overlay-text">✦ Künefe ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🏛️<span>Interieur</span></div>
+              <img src="pictures/kasarli-pide.jpg" alt="Kasarli pide" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
-                <div class="gallery-overlay-text">✦ INTERIEUR ✦</div>
+                <div class="gallery-overlay-text">✦ Kasarali pide ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🍞<span>Pide</span></div>
+              <img src="pictures/turkse thee.jpg" alt="Turkse Thee" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
-                <div class="gallery-overlay-text">✦ PIDE ✦</div>
+                <div class="gallery-overlay-text">✦ Turkse thee ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">☕<span>Turkse Thee</span></div>
+              <img src="pictures/kiymali-pide.jpg.webp" alt="Pide" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
-                <div class="gallery-overlay-text">✦ TURKSE THEE ✦</div>
+                <div class="gallery-overlay-text">✦ Pide ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">👨‍🍳<span>Onze Chef</span></div>
+              <img src="pictures/tavuksis.jpg" alt="Onze Chef" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
-                <div class="gallery-overlay-text">✦ ONZE CHEF ✦</div>
+                <div class="gallery-overlay-text">✦ Tavuk sis ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🫙<span>Kruiden</span></div>
+              <img src="pictures/hummus.jpg" alt="Kruiden" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
                 <div class="gallery-overlay-text">✦ KRUIDEN ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🌙<span>Avondsfeer</span></div>
+              <img src="pictures/meze.png" alt="Meze" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
-                <div class="gallery-overlay-text">✦ AVONDSFEER ✦</div>
+                <div class="gallery-overlay-text">✦ Meze ✦</div>
               </div>
             </div>
             <div class="gallery-item">
-              <div class="gallery-placeholder">🍯<span>Baklava</span></div>
+              <img src="pictures/Baklava(1).png" alt="Baklava" style="width:100%;height:100%;object-fit:cover;">
               <div class="gallery-overlay">
                 <div class="gallery-overlay-text">✦ BAKLAVA ✦</div>
               </div>
@@ -410,27 +405,16 @@ $stmt->execute([$cat, $zoek]);
             <div class="section-label" style="color:var(--goud)">✦ Video's ✦</div>
             <h2 class="section-title" style="color:var(--zand)">Beleef de Sfeer</h2>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem">
             <div class="video-wrap">
-              <div class="video-placeholder" style="aspect-ratio:16/9">
-                <div class="video-play-btn">▶</div>
-                <div>Sfeer avond</div>
-              </div>
-              <div class="video-title">✦ AVONDSFEER ✦</div>
+              <video width="100%" height="300" controls>
+                <source src="videos/video1.mp4" type="video/mp4">
+              </video>
             </div>
             <div class="video-wrap">
-              <div class="video-placeholder" style="aspect-ratio:16/9">
-                <div class="video-play-btn">▶</div>
-                <div>Bereidingsproces</div>
-              </div>
-              <div class="video-title">✦ BEREIDING ✦</div>
-            </div>
-            <div class="video-wrap">
-              <div class="video-placeholder" style="aspect-ratio:16/9">
-                <div class="video-play-btn">▶</div>
-                <div>Team & cultuur</div>
-              </div>
-              <div class="video-title">✦ ONS TEAM ✦</div>
+              <video width="100%" height="300" controls>
+                <source src="videos/video2.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
         </div>
