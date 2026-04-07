@@ -33,9 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       min-height: 100vh;
     }
     .login-wrap {
-      width: 420px;
+      max-width: 420px;
+      width: 100%;
       background: var(--licht-zand);
-      padding: 3rem;
+      padding: 3rem 2rem;
     }
     .login-logo {
       font-family: 'Cinzel Decorative', cursive;

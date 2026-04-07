@@ -23,11 +23,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerecht bewerken</title>
   <link rel="stylesheet" href="../style.css">
+  <style>
+    body { background: var(--licht-zand); padding: 2rem; }
+    .bewerken-wrap { max-width: 600px; margin: auto; }
+  </style>
 </head>
-<body style="padding:2rem;">
+<body>
 
+  <div class="bewerken-wrap">
   <h2>Gerecht bewerken</h2>
   <a href="index.php">← Terug</a>
 
@@ -56,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <button type="submit" class="btn-primary">Opslaan</button>
   </form>
+  </div>
 
 </body>
 </html>

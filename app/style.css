@@ -904,6 +904,33 @@ footer {
   letter-spacing: 0.1em;
 }
 
+/* ── VIDEO GRID INLINE ── */
+.video-grid-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* ── HOURS + CONTACT GRID ── */
+.hours-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ── HAMBURGER ── */
+.nav-toggle-checkbox { display: none; }
+.nav-hamburger {
+  display: none;
+  color: var(--wit);
+  font-size: 1.6rem;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+
 /* ── PAGINA NAVIGATIE ── */
 [id^="page-"]:not(:target) {
   display: none;
@@ -950,12 +977,21 @@ body:has(#page-reservation:target) #page-home {
     gap: 3rem;
   }
 
+  .hours-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
   .reservation-section {
     grid-template-columns: 1fr;
   }
 
   .reservation-image {
     height: 300px;
+  }
+
+  .reservation-form-wrap {
+    padding: 3rem 2rem;
   }
 
   .footer-grid {
@@ -1027,8 +1063,38 @@ body:has(#page-reservation:target) #page-home {
 }
 
 @media (max-width: 600px) {
+  .nav-hamburger {
+    display: flex;
+    align-items: center;
+  }
+
   .nav-links {
     display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(26, 18, 8, 0.97);
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+    z-index: 99;
+  }
+
+  .nav-toggle-checkbox:checked ~ .nav-links {
+    display: flex;
+  }
+
+  .video-grid-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
   }
 
   .gallery-grid {

@@ -61,6 +61,11 @@ if (!isset($_SESSION['ingelogd'])) {
       font-size: 0.7rem;
       text-decoration: none;
     }
+    .table-wrap { overflow-x: auto; }
+    @media (max-width: 600px) {
+      .beheer-header { flex-wrap: wrap; gap: 1rem; }
+      .beheer-header h1 { font-size: 1.1rem; }
+    }
   </style>
 </head>
 <body>
@@ -75,6 +80,7 @@ if (!isset($_SESSION['ingelogd'])) {
 
   <div class="beheer-body">
     <div class="section-label" style="margin-bottom:1rem">✦ Alle gerechten ✦</div>
+    <div class="table-wrap">
     <table>
       <tr>
         <th>Naam</th>
@@ -98,6 +104,7 @@ if (!isset($_SESSION['ingelogd'])) {
       </tr>
       <?php endforeach; ?>
     </table>
+    </div>
   </div>
 
 </body>

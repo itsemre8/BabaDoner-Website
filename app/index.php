@@ -25,7 +25,9 @@ $gerechten = $stmt->fetchAll();
   <nav>
     <div class="nav-inner">
       <a class="nav-logo" href="#page-home">Baba <span>Döner</span></a>
-      <ul class="nav-links">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+      <label for="nav-toggle" class="nav-hamburger">&#9776;</label>
+      <ul class="nav-links" onclick="document.getElementById('nav-toggle').checked=false">
         <li><a href="#page-home">Home</a></li>
         <li><a href="#page-menu">Menu</a></li>
         <li><a href="#page-gallery">Galerij</a></li>
@@ -131,7 +133,7 @@ $gerechten = $stmt->fetchAll();
           <div class="section-label" style="color:var(--goud)">✦ Behind the scenes ✦</div>
           <h2 class="section-title" style="color:var(--zand)">Beleef Baba Döner</h2>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+        <div class="video-grid-inline">
           <div class="video-wrap">
             <video width="100%" height="300" controls>
               <source src="videos/video1.mp4" type="video/mp4">
@@ -148,7 +150,7 @@ $gerechten = $stmt->fetchAll();
 
     <section class="section section-sand">
       <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+        <div class="hours-contact-grid">
           <div>
             <div class="section-label">✦ Openingstijden ✦</div>
             <h2 class="section-title" style="margin-bottom:2rem">Wanneer kunt u<br>ons bezoeken</h2>
@@ -252,7 +254,7 @@ $gerechten = $stmt->fetchAll();
       <form method="GET" action="">
         <input type="text" name="zoek" placeholder="Zoek een gerecht..."
           value="<?php echo isset($_GET['zoek']) ? htmlspecialchars($_GET['zoek']) : ''; ?>"
-          style="padding:0.8rem; width:300px; font-size:1rem;">
+          style="padding:0.8rem; width:min(300px,100%); font-size:1rem;">
         <button type="submit" class="btn-primary">Zoeken</button>
       </form>
     </div>
@@ -405,7 +407,7 @@ $gerechten = $stmt->fetchAll();
             <div class="section-label" style="color:var(--goud)">✦ Video's ✦</div>
             <h2 class="section-title" style="color:var(--zand)">Beleef de Sfeer</h2>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem">
+          <div class="video-grid-inline">
             <div class="video-wrap">
               <video width="100%" height="300" controls>
                 <source src="videos/video1.mp4" type="video/mp4">

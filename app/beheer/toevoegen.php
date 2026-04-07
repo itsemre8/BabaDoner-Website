@@ -39,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     .beheer-header h1 span { color: var(--goud); }
     .beheer-body { max-width: 600px; margin: 3rem auto; padding: 0 2rem; }
+    @media (max-width: 600px) {
+      .beheer-header { flex-wrap: wrap; gap: 1rem; }
+      .beheer-header h1 { font-size: 1.1rem; }
+    }
   </style>
 </head>
 <body>
