@@ -8,8 +8,8 @@ if (!isset($_SESSION['ingelogd'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stmt = $pdo->prepare("INSERT INTO gerechten (naam, beschrijving, prijs, categorie) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$_POST['naam'], $_POST['beschrijving'], $_POST['prijs'], $_POST['categorie']]);
+   $stmt = $pdo->prepare("INSERT INTO gerechten (naam, beschrijving, prijs, categorie, afbeelding) VALUES (?, ?, ?, ?, ?)");
+   $stmt->execute([$_POST['naam'], $_POST['beschrijving'], $_POST['prijs'], $_POST['categorie'], '']);
     header('Location: index.php');
     exit;
 }
